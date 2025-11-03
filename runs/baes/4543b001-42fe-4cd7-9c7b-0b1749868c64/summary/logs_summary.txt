@@ -1,0 +1,74 @@
+================================================================================
+EXPERIMENT RUN SUMMARY
+================================================================================
+Run ID: 4543b001-42fe-4cd7-9c7b-0b1749868c64
+Framework: baes
+Model: gpt-4o-mini
+Started: 2025-10-29T21:55:45.526195Z
+Completed: 2025-10-29T21:58:30.596706Z
+Duration: 2m 45s
+
+================================================================================
+CONFIGURATION
+================================================================================
+Steps Configured: 6
+Timeout per Step: 600s
+Max Retries: 2
+Random Seed: 42
+
+================================================================================
+STEP EXECUTION SUMMARY
+================================================================================
+Step 001: SUCCESS (duration: 20s, retries: 0)
+  - API Calls: 0
+  - Tokens (prompt/completion/total): 0 / 0 / 0
+  - LLM Requests: 0
+  - Note: Template-based generation (no LLM calls)
+
+Step 002: SUCCESS (duration: 22s, retries: 0)
+  - API Calls: 0
+  - Tokens (prompt/completion/total): 0 / 0 / 0
+  - LLM Requests: 0
+  - Note: Template-based generation (no LLM calls)
+
+Step 003: SUCCESS (duration: 35s, retries: 0)
+  - API Calls: 0
+  - Tokens (prompt/completion/total): 0 / 0 / 0
+  - LLM Requests: 0
+  - Note: Template-based generation (no LLM calls)
+
+Step 004: SUCCESS (duration: 27s, retries: 0)
+  - API Calls: 0
+  - Tokens (prompt/completion/total): 0 / 0 / 0
+  - LLM Requests: 0
+  - Note: Template-based generation (no LLM calls)
+
+Step 005: SUCCESS (duration: 27s, retries: 0)
+  - API Calls: 0
+  - Tokens (prompt/completion/total): 0 / 0 / 0
+  - LLM Requests: 0
+  - Note: Template-based generation (no LLM calls)
+
+Step 006: SUCCESS (duration: 30s, retries: 0)
+  - API Calls: 0
+  - Tokens (prompt/completion/total): 0 / 0 / 0
+  - LLM Requests: 0
+  - Note: Template-based generation (no LLM calls)
+
+================================================================================
+FINAL METRICS
+================================================================================
+Total API Calls: 0
+Total Tokens: 0
+Total Duration: 2m 41s
+Steps Completed: 6 / 6
+Success Rate: 100% (6 successful, 0 failed/timeout)
+
+================================================================================
+ARCHIVE INTEGRITY
+================================================================================
+Archive: run.tar.gz
+SHA-256: 08c264fa3ee1fa88ca676b90a59e437a4001ade30903f51a62a1317b41570f30
+Size: 71.1 KB
+Contents: workspace/ + logs/ + metrics.json + artifacts/
+================================================================================

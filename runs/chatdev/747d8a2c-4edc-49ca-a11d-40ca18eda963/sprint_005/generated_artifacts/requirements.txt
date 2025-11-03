@@ -1,0 +1,12 @@
+
+### Explanation of Dependencies:
+- **fastapi**: The web framework used to build the API.
+- **uvicorn**: An ASGI server for running FastAPI applications.
+- **sqlalchemy**: The ORM used for database interactions.
+- **alembic**: A database migration tool for SQLAlchemy.
+- **pydantic**: Used for data validation and settings management.
+
+**Note**: Tkinter is included with the Python standard library, so it does not need to be specified in the `requirements.txt`.
+
+Make sure to adjust the version numbers as needed based on your project's requirements or the latest stable releases. You can install these dependencies using the following command:
+

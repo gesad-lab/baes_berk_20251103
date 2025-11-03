@@ -1,0 +1,64 @@
+```python
+# File: tests/integration/test_teacher_controller.py
+
+import pytest
+from app import app  # Import the Flask app
+from flask import json
+
+@pytest.mark.integration
+def test_retrieve_teacher_with_valid_id(client):
+    """
+    Test case for retrieving a teacher by valid ID.
+    Endpoint: GET /teachers/<teacher_id>
+  
+    Expected Outcome: 
+      Status code 200, response with teacher details.
+    """
+    # First, create a teacher for the test
+    response = client.post('/teachers', json={
+        "name": "Jane Doe",
+        "email": "jane.doe@example.com"
+    })
+    assert response.status_code == 201  # Ensure teacher creation was successful
+    teacher_id = response.get_json()['teacher']['id']
+
+    # Now retrieve the teacher
+    response = client.get(f'/teachers/{teacher_id}')
+    
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['id'] == teacher_id
+    assert data['name'] == "Jane Doe"
+    assert data['email'] == "jane.doe@example.com"
+
+
+@pytest.mark.integration
+def test_retrieve_teacher_with_invalid_id(client):
+    """
+    Test case for retrieving a teacher by invalid ID.
+    Endpoint: GET /teachers/<teacher_id>
+  
+    Expected Outcome: 
+      Status code 404, error message indicating teacher does not exist.
+    """
+    invalid_teacher_id = 9999  # Assuming this ID does not exist
+    response = client.get(f'/teachers/{invalid_teacher_id}')
+    
+    assert response.status_code == 404
+    data = response.get_json()
+    assert data['error']['code'] == "E003"
+    assert data['error']['message'] == "Teacher does not exist."
+
+
+@pytest.mark.integration
+def test_retrieve_teacher_with_non_integer_id(client):
+    """
+    Test case for retrieving a teacher by non-integer ID.
+    Expected outcome: Validation error on the request.
+    """
+    response = client.get('/teachers/abc')  # Non-integer ID
+
+    assert response.status_code == 400  # Bad Request for invalid ID format
+    data = response.get_json()
+    assert 'error' in data
+```

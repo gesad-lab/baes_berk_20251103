@@ -1,0 +1,60 @@
+```toml
+[tool.pytest]
+addopts = "-v --tb=short"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
+
+# Additional configurations for coverage
+[coverage]
+branch = true
+source = ["src"]
+```
+
+
+### New Test Implementation
+
+```python
+import pytest
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
+from services.student_service import create_student, get_students
+from db.database import initialize_database
+
+app = FastAPI()
+
+@app.on_event("startup")
+def startup_event():
+    initialize_database()
+
+@app.post("/students")
+def create_student_endpoint(student: dict):
+    return create_student(student["name"])
+
+@app.get("/students")
+def get_students_endpoint():
+    return get_students()
+
+client = TestClient(app)
+
+def test_create_student_success():
+    response = client.post("/students", json={"name": "John Doe"})
+    assert response.status_code == 201
+    assert response.json() == {"name": "John Doe"}
+
+def test_retrieve_students_success():
+    # First, create a student to ensure we have data to retrieve
+    client.post("/students", json={"name": "Jane Doe"})
+    
+    response = client.get("/students")
+    assert response.status_code == 200
+    assert len(response.json()) > 0  # Check if there are students in response
+    assert any(student['name'] == "Jane Doe" for student in response.json())
+
+def test_create_student_missing_name():
+    response = client.post("/students", json={})
+    assert response.status_code == 400  # Bad request for missing name
+    assert response.json() == {"error": {"code": "E001", "message": "Missing name for student"}}  
+```

@@ -1,0 +1,17 @@
+# Create the necessary subfolders for the project
+
+# This code does not modify any existing logic but creates a directory structure needed for the application.
+
+import os
+
+# Define the directories to be created
+subfolders = ['src', 'tests', 'docs']
+
+# Create subfolders in the student_management_app directory
+for folder in subfolders:
+    try:
+        os.makedirs(os.path.join('student_management_app', folder), exist_ok=True)
+    except OSError as e:
+        print(f"Error creating directory {folder}: {e}")
+
+# End of file

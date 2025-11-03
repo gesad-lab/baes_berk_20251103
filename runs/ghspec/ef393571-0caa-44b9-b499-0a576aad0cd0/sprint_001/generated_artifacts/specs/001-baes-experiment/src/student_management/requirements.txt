@@ -1,0 +1,30 @@
+```python
+import json
+import pytest
+from fastapi.testclient import TestClient
+from src.main import app
+
+client = TestClient(app)
+
+@pytest.fixture
+def clear_students():
+    # Clear the database or reset state before each test
+    with app.app_context():
+        pass  # Add logic to clear the students database for isolation
+
+def test_add_student_valid_name(clear_students):
+    response = client.post("/students", json={"name": "John Doe"})
+    assert response.status_code == 201
+    assert response.json() == {"id": 1, "name": "John Doe"}  # Assuming ID starts from 1
+
+def test_retrieve_student_information(clear_students):
+    client.post("/students", json={"name": "Jane Doe"})
+    response = client.get("/students")
+    assert response.status_code == 200
+    assert response.json() == [{"id": 1, "name": "Jane Doe"}]  # Check if the correct info is returned
+
+def test_add_student_without_name(clear_students):
+    response = client.post("/students", json={})
+    assert response.status_code == 400
+    assert response.json() == {"error": {"code": "E001", "message": "Name is required."}}
+```

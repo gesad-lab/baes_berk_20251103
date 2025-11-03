@@ -1,0 +1,9 @@
+
+### Explanation of Dependencies:
+- **SQLAlchemy**: This is the ORM (Object Relational Mapper) used in your project for database interactions.
+- **Pydantic**: This library is used for data validation and settings management using Python type annotations.
+
+Note: `sqlite3` is included with Python's standard library, so it does not need to be listed in the `requirements.txt`.
+
+Make sure to adjust the version numbers as needed based on your project's requirements or compatibility. You can install these dependencies using the following command:
+

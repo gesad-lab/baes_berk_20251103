@@ -1,0 +1,10 @@
+# Creating a requirements.txt file in the src/ directory for the project dependencies.
+
+# This file will include the essential dependencies for a web application managing a student entity.
+
+# Ideally, it starts with Flask for creating the web server and SQLAlchemy for database ORM.
+
+Flask==2.2.2
+Flask-RESTful==0.3.9
+Flask-SQLAlchemy==2.5.1
+SQLite==3.36.0

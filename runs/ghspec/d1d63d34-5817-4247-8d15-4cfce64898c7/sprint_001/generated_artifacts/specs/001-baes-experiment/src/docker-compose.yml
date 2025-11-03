@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      - DATABASE_URL=sqlite:///./students.db
+    ports:
+      - "8000:8000"
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  db:
+    image: nouchka/sqlite3
+    volumes:
+      - ./students.db:/data/students.db
+    entrypoint: ["sleep", "infinity"]  # Keeps the db container running for the app to connect.

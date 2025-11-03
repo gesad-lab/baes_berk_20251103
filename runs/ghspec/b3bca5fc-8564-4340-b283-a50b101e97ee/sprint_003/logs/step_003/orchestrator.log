@@ -1,0 +1,7 @@
+{"timestamp": "2025-10-31T17:46:50.336802Z", "level": "INFO", "module": "runner", "message": "Created sprint 3 workspace", "run_id": "b3bca5fc-8564-4340-b283-a50b101e97ee", "event": "sprint_workspace_created"}
+{"timestamp": "2025-10-31T17:48:23.837631Z", "level": "WARNING", "module": "runner", "message": "Step failed", "run_id": "b3bca5fc-8564-4340-b283-a50b101e97ee", "step": 3, "metadata": {"attempt": 1, "error": "OpenAI API call failed: 502 Server Error: Bad Gateway for url: https://api.openai.com/v1/chat/completions"}}
+{"timestamp": "2025-10-31T17:48:23.837698Z", "level": "INFO", "module": "runner", "message": "Retrying step", "run_id": "b3bca5fc-8564-4340-b283-a50b101e97ee", "step": 3, "metadata": {"attempt": 1, "backoff": 5}}
+{"timestamp": "2025-10-31T17:49:20.283401Z", "level": "INFO", "module": "runner", "message": "Step succeeded after retry", "run_id": "b3bca5fc-8564-4340-b283-a50b101e97ee", "step": 3, "metadata": {"attempts": 2}}
+{"timestamp": "2025-10-31T17:49:20.283578Z", "level": "DEBUG", "module": "runner", "message": "Saved sprint 3 metadata", "run_id": "b3bca5fc-8564-4340-b283-a50b101e97ee"}
+{"timestamp": "2025-10-31T17:49:20.283728Z", "level": "DEBUG", "module": "runner", "message": "Saved sprint validation", "run_id": "b3bca5fc-8564-4340-b283-a50b101e97ee"}
+{"timestamp": "2025-10-31T17:49:20.283784Z", "level": "INFO", "module": "runner", "message": "Sprint completed successfully", "run_id": "b3bca5fc-8564-4340-b283-a50b101e97ee", "event": "sprint_complete"}

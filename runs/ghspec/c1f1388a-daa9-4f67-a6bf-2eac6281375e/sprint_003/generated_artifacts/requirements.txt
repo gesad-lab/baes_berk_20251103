@@ -1,0 +1,12 @@
+```
+# requirements.txt
+
+# Existing dependencies
+fastapi==0.68.0
+uvicorn==0.15.0
+sqlalchemy==1.4.27
+pydantic==1.8.2
+
+# New dependencies reflected for course feature
+alembic==1.7.5  # for database migrations
+```

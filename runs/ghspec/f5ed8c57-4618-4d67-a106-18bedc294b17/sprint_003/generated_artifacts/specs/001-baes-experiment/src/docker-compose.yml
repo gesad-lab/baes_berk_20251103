@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/mydatabase  # Adjust placeholder values accordingly
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: user  # Set your desired database user
+      POSTGRES_PASSWORD: password  # Set your desired database password
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+    driver: local
+
+# Note: Ensure this configuration aligns with your application requirements and 
+# environment. Adjust username, password, and database name as necessary. 
+# This setup should support the new `courses` functionality by providing a PostgreSQL 
+# database service alongside the application.

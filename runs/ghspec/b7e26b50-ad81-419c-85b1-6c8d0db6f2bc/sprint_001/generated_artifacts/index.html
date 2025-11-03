@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Entry Form</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Optional CSS file for styling -->
+</head>
+<body>
+    <h1>Create a New Student</h1>
+    <form id="student-form" action="/students" method="POST">
+        <label for="student-name">Student Name:</label>
+        <input type="text" id="student-name" name="name" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="message"></div>
+
+    <script>
+        document.getElementById('student-form').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
+
+            const nameInput = document.getElementById('student-name');
+            const nameValue = nameInput.value;
+
+            // Send a POST request to the /students endpoint
+            try {
+                const response = await fetch('/students', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: nameValue })
+                });
+
+                // Handle response based on status
+                if (response.ok) {
+                    const jsonResponse = await response.json();
+                    document.getElementById('message').innerText = `Success: ${jsonResponse.message}`;
+                    nameInput.value = ''; // Clear input field on success
+                } else if (response.status === 400) {
+                    const errorResponse = await response.json();
+                    document.getElementById('message').innerText = `Error: ${errorResponse.error.message}`;
+                } else {
+                    document.getElementById('message').innerText = 'Error: Unable to create student.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('message').innerText = 'Error: Unable to connect to the server.';
+            }
+        });
+    </script>
+</body>
+</html>

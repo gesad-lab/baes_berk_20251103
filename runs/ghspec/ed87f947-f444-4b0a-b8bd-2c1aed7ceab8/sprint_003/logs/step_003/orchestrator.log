@@ -1,0 +1,7 @@
+{"timestamp": "2025-10-28T21:19:07.125114Z", "level": "INFO", "module": "runner", "message": "Created sprint 3 workspace", "run_id": "ed87f947-f444-4b0a-b8bd-2c1aed7ceab8", "event": "sprint_workspace_created"}
+{"timestamp": "2025-10-28T21:21:21.810242Z", "level": "WARNING", "module": "runner", "message": "Step failed", "run_id": "ed87f947-f444-4b0a-b8bd-2c1aed7ceab8", "step": 3, "metadata": {"attempt": 1, "error": "OpenAI API call failed: HTTPSConnectionPool(host='api.openai.com', port=443): Read timed out. (read timeout=120)"}}
+{"timestamp": "2025-10-28T21:21:21.810308Z", "level": "INFO", "module": "runner", "message": "Retrying step", "run_id": "ed87f947-f444-4b0a-b8bd-2c1aed7ceab8", "step": 3, "metadata": {"attempt": 1, "backoff": 5}}
+{"timestamp": "2025-10-28T21:24:37.942104Z", "level": "INFO", "module": "runner", "message": "Step succeeded after retry", "run_id": "ed87f947-f444-4b0a-b8bd-2c1aed7ceab8", "step": 3, "metadata": {"attempts": 2}}
+{"timestamp": "2025-10-28T21:24:37.942301Z", "level": "DEBUG", "module": "runner", "message": "Saved sprint 3 metadata", "run_id": "ed87f947-f444-4b0a-b8bd-2c1aed7ceab8"}
+{"timestamp": "2025-10-28T21:24:37.942454Z", "level": "DEBUG", "module": "runner", "message": "Saved sprint validation", "run_id": "ed87f947-f444-4b0a-b8bd-2c1aed7ceab8"}
+{"timestamp": "2025-10-28T21:24:37.942512Z", "level": "INFO", "module": "runner", "message": "Sprint completed successfully", "run_id": "ed87f947-f444-4b0a-b8bd-2c1aed7ceab8", "event": "sprint_complete"}

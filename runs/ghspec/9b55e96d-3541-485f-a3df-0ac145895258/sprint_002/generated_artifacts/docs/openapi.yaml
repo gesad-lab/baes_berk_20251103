@@ -1,0 +1,118 @@
+openapi: 3.0.0
+info:
+  title: Student API
+  version: 1.0.0
+  description: API for managing students in the system
+servers:
+  - url: http://localhost:8000
+paths:
+  /students/:
+    post:
+      summary: Create a new student
+      operationId: createStudent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the student
+                  example: John Doe
+                age:
+                  type: integer
+                  description: The age of the student
+                  example: 20
+                email:
+                  type: string
+                  description: The email address of the student
+                  example: johndoe@example.com
+              required:
+                - name
+                - age
+                - email
+      responses:
+        '201':
+          description: Student created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: The unique identifier of the student
+                    example: 1
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message explaining why the input was invalid
+                    example: Invalid email format
+  /students/{id}:
+    get:
+      summary: Retrieve a student by ID
+      operationId: getStudentById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The unique identifier of the student
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Student retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: John Doe
+                  age:
+                    type: integer
+                    example: 20
+                  email:
+                    type: string
+                    example: johndoe@example.com
+        '404':
+          description: Student not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: The error message indicating the student was not found
+                    example: Student not found
+
+components:
+  schemas:
+    Student:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: John Doe
+        age:
+          type: integer
+          example: 20
+        email:
+          type: string
+          example: johndoe@example.com

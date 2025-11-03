@@ -1,0 +1,12 @@
+```
+# requirements.txt
+
+# Core dependencies
+Flask==2.0.2
+SQLAlchemy==1.4.22
+Flask-SQLAlchemy==2.5.1
+pytest==6.2.4
+pytest-flask==1.2.0
+# Additional dependency for database migrations
+Alembic==1.7.7
+```

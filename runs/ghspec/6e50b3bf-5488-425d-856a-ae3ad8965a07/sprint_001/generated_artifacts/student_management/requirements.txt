@@ -1,0 +1,21 @@
+```plaintext
+# Requirements file for the Student Management API
+
+# Flask is a lightweight WSGI web application framework
+Flask==2.1.2
+
+# Flask SQLAlchemy is an extension that adds support for SQLAlchemy to Flask
+Flask-SQLAlchemy==2.5.1
+
+# Marshmallow is a library for object serialization/deserialization
+Flask-Marshmallow==0.14.0
+
+# pytest is a testing framework for Python
+pytest==7.1.0
+
+# psycopg2 is a PostgreSQL adapter for Python, replace with the appropriate DB adapter as needed
+psycopg2-binary==2.9.3
+
+# python-dotenv is used to load environment variables from a .env file
+python-dotenv==0.19.2
+```

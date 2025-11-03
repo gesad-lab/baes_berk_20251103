@@ -1,0 +1,65 @@
+```python
+import pytest
+from flask import json
+from app import create_app, db  # Assuming Flask app and SQLAlchemy are imported from app module
+from app.models import Student  # Assuming Student model is imported from models
+
+
+@pytest.fixture
+def client():
+    app = create_app()
+    with app.test_client() as client:
+        with app.app_context():
+            db.create_all()  # Create the database and tables
+        yield client
+        with app.app_context():
+            db.drop_all()  # Clean up after tests
+
+
+def test_update_student_email(client):
+    # Arrange: Create a student to update
+    new_student = Student(name='John Doe', email='john@example.com')
+    db.session.add(new_student)
+    db.session.commit()
+    
+    # Act: Update the student's email
+    response = client.put(f'/students/{new_student.id}', data=json.dumps({
+        'email': 'john.doe@newdomain.com'
+    }), content_type='application/json')
+    
+    # Assert: Check for a successful response and updated email
+    assert response.status_code == 200
+    response_data = json.loads(response.data)
+    assert response_data['message'] == 'Student updated successfully.'
+    
+    # Verify the email is updated in the database
+    updated_student = Student.query.get(new_student.id)
+    assert updated_student.email == 'john.doe@newdomain.com'
+
+
+def test_update_student_email_missing(client):
+    # Arrange: Create a student to test missing email scenario
+    new_student = Student(name='Jane Doe', email='jane@example.com')
+    db.session.add(new_student)
+    db.session.commit()
+    
+    # Act: Attempt to update the student's email without providing an email
+    response = client.put(f'/students/{new_student.id}', data=json.dumps({}), content_type='application/json')
+    
+    # Assert: Check for a bad request response
+    assert response.status_code == 400
+    response_data = json.loads(response.data)
+    assert response_data['error']['message'] == 'Email is required to update the student.'
+
+
+def test_update_nonexistent_student(client):
+    # Act: Attempt to update a student that does not exist
+    response = client.put('/students/999', data=json.dumps({
+        'email': 'nonexistent@example.com'
+    }), content_type='application/json')
+    
+    # Assert: Check for a not found response
+    assert response.status_code == 404
+    response_data = json.loads(response.data)
+    assert response_data['error']['message'] == 'Student not found.'
+```

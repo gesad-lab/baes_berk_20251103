@@ -1,0 +1,43 @@
+EXPANDED SPECIFICATION - Generic Guidance
+
+TECHNOLOGY STACK:
+- Use the technologies specified in the prompt
+- If not specified, use your best judgment based on common practices
+- Prefer widely-adopted and well-documented tools
+
+IMPLEMENTATION APPROACH:
+- Follow the prompt requirements exactly as stated
+- For unspecified details, use industry best practices
+- When in doubt, choose the simplest working solution
+- Ensure data persistence across application restarts
+
+DATA MODELING:
+- Create entities with the fields explicitly mentioned in the prompt
+- Use appropriate data types for each field (your best guess)
+- Add primary keys automatically (auto-increment integers)
+- Implement relationships as described in the prompt
+
+API DESIGN:
+- Use RESTful conventions when applicable
+- Return JSON responses unless otherwise specified
+- Implement basic error handling
+- Choose appropriate HTTP methods and status codes
+
+DATABASE:
+- Auto-create schema on first startup
+- When adding new fields or entities, preserve existing data
+- Use migrations or schema updates that don't lose data
+- Enforce data integrity where it makes sense
+
+VALIDATION:
+- Apply sensible validation for fields (e.g., non-empty strings, valid email formats)
+- Use your best judgment for constraints not explicitly mentioned
+- Handle errors gracefully
+
+GENERAL PRINCIPLES:
+- Incremental development: each sprint builds on the previous one
+- Backward compatibility: don't break existing functionality
+- Simplicity: don't over-engineer solutions
+- Functionality: ensure the application works as requested
+
+When specifications are ambiguous or incomplete, use your best professional judgment to fill in the gaps in a reasonable and conventional way.

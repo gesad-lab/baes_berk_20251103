@@ -1,0 +1,65 @@
+```python
+import pytest
+from flask import json
+from student_app import create_app, db
+from student_app.models.student import Student
+
+@pytest.fixture
+def app():
+    """Create a new Flask application instance for the test."""
+    app = create_app(testing=True)
+
+    # Create the database and tables
+    with app.app_context():
+        db.create_all()
+    
+    yield app
+
+    # Clean up after the test
+    with app.app_context():
+        db.drop_all()
+
+@pytest.fixture
+def client(app):
+    """Create a test client for the Flask application."""
+    return app.test_client()
+
+def test_create_student(client):
+    """Test creating a new student with valid name."""
+    response = client.post('/students', json={'name': 'John Doe'})
+    assert response.status_code == 201
+    data = json.loads(response.data)
+    assert 'id' in data
+    assert data['name'] == 'John Doe'
+
+    # Test creating a student with an invalid name (empty)
+    response = client.post('/students', json={'name': ''})
+    assert response.status_code == 400
+    data = json.loads(response.data)
+    assert data['error']['message'] == "Name is required."
+
+def test_retrieve_students(client):
+    """Test retrieving the list of students."""
+    # First, create a couple of students
+    client.post('/students', json={'name': 'Jane Doe'})
+    client.post('/students', json={'name': 'John Smith'})
+
+    response = client.get('/students')
+    assert response.status_code == 200
+    data = json.loads(response.data)
+    
+    # Verify that the correct number of students is returned
+    assert len(data) == 2
+    
+    # Check for the contents of each student in the response
+    student_names = {student['name'] for student in data}
+    assert 'Jane Doe' in student_names
+    assert 'John Smith' in student_names
+
+def test_handle_invalid_student_creation(client):
+    """Test that submitting invalid student names returns appropriate errors."""
+    response = client.post('/students', json={'name': ''})
+    assert response.status_code == 400
+    data = json.loads(response.data)
+    assert data['error']['message'] == "Name is required."
+```

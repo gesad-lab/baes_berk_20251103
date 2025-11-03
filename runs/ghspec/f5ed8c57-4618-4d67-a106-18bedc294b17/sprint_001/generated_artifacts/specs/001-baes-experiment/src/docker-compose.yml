@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/student_management
+    depends_on:
+      - db
+    volumes:
+      - ./app:/app
+    networks:
+      - student_management_network
+
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      - POSTGRES_DB=student_management
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - student_management_network
+
+networks:
+  student_management_network:
+    driver: bridge
+
+volumes:
+  db_data: 
+    driver: local

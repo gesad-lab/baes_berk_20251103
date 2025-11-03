@@ -1,0 +1,10 @@
+
+### Explanation of Dependencies:
+- **fastapi**: The web framework used to create the API endpoints for the Student entity.
+- **uvicorn**: An ASGI server for running FastAPI applications.
+- **sqlalchemy**: The ORM used for database interactions and defining the Student model.
+- **requests**: A library for making HTTP requests, used in the GUI to communicate with the FastAPI backend.
+- **pydantic**: A data validation and settings management library used for defining the data models in FastAPI.
+
+Make sure to adjust the version numbers if you want to use specific versions or if you want to use the latest versions available. You can install these dependencies using the command:
+

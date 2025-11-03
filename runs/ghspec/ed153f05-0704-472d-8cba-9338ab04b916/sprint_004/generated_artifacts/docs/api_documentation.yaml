@@ -1,0 +1,113 @@
+---
+# ./docs/api_documentation.yaml
+
+version: 1.0
+api:
+  title: Student-Course API
+  description: API for managing student enrollments in courses.
+  base_url: /api/v1
+  endpoints:
+    - path: /students/{id}/courses
+      method: POST
+      summary: Enroll a student in a course
+      description: This endpoint allows enrolling a specified student in a course.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the student to enroll.
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                course_id:
+                  type: integer
+                  description: The ID of the course to enroll the student in.
+      responses:
+        '200':
+          description: Successfully enrolled the student in the course.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Student enrolled in course successfully."
+        '400':
+          description: Bad Request - invalid input or student not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    example:
+                      code: "E001"
+                      message: "Student not found."
+    
+    - path: /students/{id}/courses
+      method: GET
+      summary: Retrieve all courses for a student
+      description: This endpoint retrieves all courses that the specified student is enrolled in.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the student whose courses to retrieve.
+          type: integer
+      responses:
+        '200':
+          description: A list of courses the student is enrolled in.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  courses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        level:
+                          type: string
+              example:
+                courses:
+                  - id: 1
+                    name: "Mathematics"
+                    level: "Beginner"
+                  - id: 2
+                    name: "Science"
+                    level: "Intermediate"
+        '404':
+          description: Not Found - student does not exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    example:
+                      code: "E001"
+                      message: "Student not found." 
+...

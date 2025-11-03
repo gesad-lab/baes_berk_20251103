@@ -1,0 +1,10 @@
+
+### Explanation of Dependencies:
+- **fastapi**: The web framework used to build the API.
+- **uvicorn**: The ASGI server used to run the FastAPI application.
+- **sqlalchemy**: The ORM used for database interactions.
+- **pydantic**: Used for data validation and settings management.
+- **alembic**: A lightweight database migration tool for use with SQLAlchemy.
+
+Make sure to adjust the versions based on your specific project requirements or compatibility needs. You can install these dependencies using the following command:
+

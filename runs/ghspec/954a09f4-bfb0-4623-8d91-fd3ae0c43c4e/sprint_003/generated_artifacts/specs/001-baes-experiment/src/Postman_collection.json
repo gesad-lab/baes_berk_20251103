@@ -1,0 +1,77 @@
+{
+  "info": {
+    "_postman_id": "xxxxx-xxxx-xxxx-xxxx-xxxxxxxx",
+    "name": "Course API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Course",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"Mathematics\", \"level\": \"Beginner\"}"
+        },
+        "url": {
+          "raw": "{{base_url}}/courses",
+          "protocol": "http",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "courses"
+          ]
+        }
+      },
+      "response": [
+        {
+          "code": 201,
+          "body": "{\"id\": 1, \"name\": \"Mathematics\", \"level\": \"Beginner\"}",
+          "status": "Created"
+        },
+        {
+          "code": 400,
+          "body": "{\"error\": {\"code\": \"E001\", \"message\": \"Name and level are required.\"}}",
+          "status": "Bad Request"
+        }
+      ]
+    },
+    {
+      "name": "Retrieve Course by ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/courses/1",
+          "protocol": "http",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "courses",
+            "1"
+          ]
+        }
+      },
+      "response": [
+        {
+          "code": 200,
+          "body": "{\"id\": 1, \"name\": \"Mathematics\", \"level\": \"Beginner\"}",
+          "status": "OK"
+        },
+        {
+          "code": 404,
+          "body": "{\"error\": {\"code\": \"E002\", \"message\": \"Course not found.\"}}",
+          "status": "Not Found"
+        }
+      ]
+    }
+  ]
+}

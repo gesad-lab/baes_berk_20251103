@@ -1,0 +1,179 @@
+# Tasks: Add Teacher Relationship to Course Entity
+
+---
+
+INCREMENTAL DEVELOPMENT CONTEXT
+
+Existing Code to Build Upon:
+- `src/models/course.py`
+- `src/models/teacher.py`
+- `src/routes/courses.py`
+- `src/main.py`
+- `tests/test_courses.py`
+
+---
+
+## Task Breakdown
+
+### 1. Database Migration
+
+- [ ] **Task**: Create migration script to add `teacher_id` to `courses` table.
+  - **File**: `migrations/versions/<timestamp>_add_teacher_id_to_courses.py`
+  ```python
+  def upgrade():
+      op.add_column('courses', sa.Column('teacher_id', sa.Integer(), nullable=True))
+      op.create_foreign_key('fk_teacher_course', 'courses', 'teachers', ['teacher_id'], ['id'])
+
+  def downgrade():
+      op.drop_constraint('fk_teacher_course', 'courses', type_='foreignkey')
+      op.drop_column('courses', 'teacher_id')
+  ```
+
+### 2. Update Models
+
+- [ ] **Task**: Update `Course` model to include a `teacher_id` field and a relationship with the `Teacher` model.
+  - **File**: `src/models/course.py`
+  
+```python
+from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
+
+class Course(Base):
+    __tablename__ = 'courses'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    # ... other fields ...
+    teacher_id = Column(Integer, ForeignKey('teachers.id'), nullable=True)
+
+    teacher = relationship("Teacher", back_populates="courses")
+```
+
+- [ ] **Task**: Update `Teacher` model to maintain a reverse relationship.
+  - **File**: `src/models/teacher.py`
+  
+```python
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
+
+Base = declarative_base()
+
+class Teacher(Base):
+    __tablename__ = 'teachers'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(255), nullable=False)
+    email = Column(String(255), nullable=False, unique=True)
+
+    courses = relationship("Course", back_populates="teacher")
+```
+
+### 3. Extend API Endpoints
+
+- [ ] **Task**: Implement the API endpoint for assigning a teacher to a course.
+  - **File**: `src/routes/courses.py`
+
+```python
+from fastapi import APIRouter, HTTPException, Depends
+from sqlalchemy.orm import Session
+from ..models.course import Course
+from ..models.teacher import Teacher
+from ..database import get_db
+from pydantic import BaseModel
+
+router = APIRouter()
+
+class TeacherAssignment(BaseModel):
+    teacherId: int
+
+@router.post("/courses/{course_id}/assign-teacher", status_code=200)
+async def assign_teacher(course_id: int, assignment: TeacherAssignment, db: Session = Depends(get_db)):
+    course = db.query(Course).filter(Course.id == course_id).first()
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found.")
+    
+    teacher = db.query(Teacher).filter(Teacher.id == assignment.teacherId).first()
+    if not teacher:
+        raise HTTPException(status_code=404, detail="Teacher not found.")
+    
+    course.teacher_id = assignment.teacherId
+    db.commit()
+    return {"message": "Teacher assigned successfully.", "courseId": course_id, "teacherId": assignment.teacherId}
+```
+
+- [ ] **Task**: Implement the API endpoint for retrieving course information including teacher details.
+  - **File**: `src/routes/courses.py`
+
+```python
+@router.get("/courses/{course_id}")
+async def get_course_by_id(course_id: int, db: Session = Depends(get_db)):
+    course = db.query(Course).filter(Course.id == course_id).first()
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found.")
+    return {
+        "id": course.id,
+        "title": course.title,
+        "teacher": {"name": course.teacher.name, "email": course.teacher.email} if course.teacher else None
+    }
+```
+
+### 4. Update Main Application
+
+- [ ] **Task**: Include the new courses routes in the main application.
+  - **File**: `src/main.py`
+
+```python
+from fastapi import FastAPI
+from .routes.courses import router as course_router
+
+app = FastAPI()
+
+app.include_router(course_router)
+```
+
+### 5. Enhance Testing
+
+- [ ] **Task**: Update existing tests to cover the new teacher assignment functionality.
+  - **File**: `tests/test_courses.py`
+
+```python
+from fastapi.testclient import TestClient
+from main import app
+
+client = TestClient(app)
+
+def test_assign_teacher_to_course():
+    response = client.post("/courses/1/assign-teacher", json={"teacherId": 1})
+    assert response.status_code == 200
+
+def test_get_course_with_teacher():
+    response = client.get("/courses/1")
+    assert response.status_code == 200
+    
+def test_assign_teacher_non_existing_course():
+    response = client.post("/courses/999/assign-teacher", json={"teacherId": 1})
+    assert response.status_code == 404
+```
+
+### 6. Documentation
+
+- [ ] **Task**: Verify that Swagger documentation reflects the new API endpoints.
+  - **File**: Automatically generated by FastAPI
+   
+### 7. Integration Testing
+
+- [ ] **Task**: Ensure the database migration and API functionalities are tested on a local PostgreSQL instance using docker.
+
+---
+
+## Success Criteria
+
+- Each task should be independently testable via unit tests.
+- Ensure all new and modified endpoints return expected responses as defined in the implementation plan.
+- Confirm that the database migration runs smoothly and adds the `teacher_id` column to the `Courses` table without affecting existing records.
+
+## Conclusion
+By following through with these focused tasks, the relationship between the Course and Teacher entities can be effectively established while maintaining the integrity of the existing application architecture and functionality.

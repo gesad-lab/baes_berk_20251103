@@ -1,0 +1,3 @@
+{"timestamp": "2025-10-31T08:34:58.740257Z", "level": "INFO", "module": "ghspec_adapter", "message": "Stopping GitHub Spec-kit framework", "run_id": "b98df2d5-8b8c-4660-8052-678daec3aace", "event": "framework_stop"}
+{"timestamp": "2025-10-31T08:34:58.740351Z", "level": "INFO", "module": "ghspec_adapter", "message": "GitHub Spec-kit framework stopped", "run_id": "b98df2d5-8b8c-4660-8052-678daec3aace", "event": "framework_stopped"}
+{"timestamp": "2025-10-31T08:34:58.740518Z", "level": "WARNING", "module": "main", "message": "Experiment interrupted by user"}

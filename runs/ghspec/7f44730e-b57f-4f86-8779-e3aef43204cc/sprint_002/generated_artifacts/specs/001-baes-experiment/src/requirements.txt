@@ -1,0 +1,35 @@
+```python
+# tests/test_student.py
+from fastapi.testclient import TestClient
+from main import app
+
+client = TestClient(app)
+
+def test_create_student_valid():
+    """Test creating a student with a valid name and email."""
+    response = client.post("/students", json={"name": "John Doe", "email": "john.doe@example.com"})
+    # Assert that the creation was successful and response format is as expected
+    assert response.status_code == 200
+    assert response.json() == {"message": "Student created successfully", "student": {"name": "John Doe", "email": "john.doe@example.com"}}
+
+def test_create_student_empty_name():
+    """Test creating a student with an empty name."""
+    response = client.post("/students", json={"name": "", "email": "john.doe@example.com"})
+    # Assert that the creation fails and returns the proper error message
+    assert response.status_code == 400
+    assert response.json() == {"error": {"code": "E001", "message": "Name is required"}}
+
+def test_create_student_invalid_email():
+    """Test creating a student with an improperly formatted email."""
+    response = client.post("/students", json={"name": "John Doe", "email": "invalid-email"})
+    # Assert that the creation fails and that the error message is returned
+    assert response.status_code == 422  # Usually returns 422 Unprocessable Entity for validation errors
+    assert "email" in response.json()["detail"][0]["loc"]  # Check if the error corresponds to the email field
+
+def test_get_students():
+    """Test retrieving the list of students."""
+    response = client.get("/students")
+    # Assert that the retrieval was successful and the response format is as expected
+    assert response.status_code == 200
+    assert "students" in response.json()  # Check that the students field exists
+```

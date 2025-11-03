@@ -1,0 +1,9 @@
+
+### Explanation of Dependencies:
+- **fastapi**: The web framework used for building APIs.
+- **uvicorn**: The ASGI server for running the FastAPI application.
+- **sqlalchemy**: The ORM (Object Relational Mapper) used for database interactions.
+- **pydantic**: Used for data validation and settings management.
+
+Make sure to adjust the version numbers according to your project's needs or the latest stable releases if necessary. You can install these dependencies using pip with the command:
+

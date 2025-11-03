@@ -1,0 +1,79 @@
+```python
+import pytest
+from src.models.course import Course
+from src.database import SessionLocal
+from fastapi.testclient import TestClient
+from src.main import app
+
+client = TestClient(app)
+
+@pytest.fixture(scope="module")
+def setup():
+    # Setup database connection and create the table for tests
+    db = SessionLocal()
+    yield db
+    # Cleanup if necessary (e.g., drop the table)
+
+def test_create_course_success(setup):
+    """
+    Test case for creating a course successfully.
+    Expected outcome: A new Course entity is created and returns the correct JSON response.
+    """
+    response = client.post("/courses", json={"name": "Introduction to Programming", "level": "Beginner"})
+    
+    assert response.status_code == 201
+    json_response = response.json()
+    assert "id" in json_response
+    assert json_response["name"] == "Introduction to Programming"
+    assert json_response["level"] == "Beginner"
+
+def test_create_course_without_name(setup):
+    """
+    Test case for creating a course without a name.
+    Expected outcome: 400 Bad Request with an appropriate error message.
+    """
+    response = client.post("/courses", json={"level": "Beginner"})
+    
+    assert response.status_code == 400
+    json_response = response.json()
+    assert json_response["error"]["code"] == "E001"
+    assert json_response["error"]["message"] == "Both name and level fields are required."
+
+def test_create_course_without_level(setup):
+    """
+    Test case for creating a course without a level.
+    Expected outcome: 400 Bad Request with an appropriate error message.
+    """
+    response = client.post("/courses", json={"name": "Intermediate Python"})
+    
+    assert response.status_code == 400
+    json_response = response.json()
+    assert json_response["error"]["code"] == "E001"
+    assert json_response["error"]["message"] == "Both name and level fields are required."
+
+def test_create_course_with_invalid_data(setup):
+    """
+    Test case for creating a course with invalid data types.
+    Expected outcome: 400 Bad Request with an error message indicating invalid input types.
+    """
+    response = client.post("/courses", json={"name": 123, "level": 456})
+    
+    assert response.status_code == 400
+    json_response = response.json()
+    assert json_response["error"]["message"] == "Both name and level fields must be strings."
+
+def test_retrieve_existing_course(setup):
+    """
+    Test case for retrieving a course by ID.
+    Expected outcome: The course's name and level are returned in a JSON format.
+    """
+    # Assuming a course was created with ID 1 for this test case purpose
+    response = client.get("/courses/1")
+    
+    assert response.status_code == 200
+    json_response = response.json()
+    assert "name" in json_response
+    assert "level" in json_response
+    assert json_response["name"] == "Introduction to Programming"
+    assert json_response["level"] == "Beginner"
+```

@@ -1,0 +1,26 @@
+'''
+Database migration script to add Course table, email field to Student table, and Teacher table.
+'''
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker
+from models import Base, Student, Course, Teacher
+DATABASE_URL = "sqlite:///./students.db"
+engine = create_engine(DATABASE_URL)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+def upgrade():
+    # Create tables if they don't exist
+    Base.metadata.create_all(engine)  # This creates all tables including teachers
+    with engine.connect() as connection:
+        # Check if the students table exists before altering
+        result = connection.execute(text("SELECT name FROM sqlite_master WHERE type='table' AND name='students'"))
+        if result.fetchone() is not None:
+            # Check if the email column already exists
+            result = connection.execute(text("PRAGMA table_info(students)"))
+            columns = [row[1] for row in result.fetchall()]
+            if 'email' not in columns:
+                # Now alter the table to add the email column
+                connection.execute(text('ALTER TABLE students ADD COLUMN email TEXT NOT NULL'))  # Ensure this is NOT NULL
+                # Update existing records with a default email
+                connection.execute(text('UPDATE students SET email = "default@example.com" WHERE email IS NULL'))
+if __name__ == "__main__":
+    upgrade()

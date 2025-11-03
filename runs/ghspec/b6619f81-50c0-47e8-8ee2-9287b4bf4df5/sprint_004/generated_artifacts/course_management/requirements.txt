@@ -1,0 +1,11 @@
+```
+# requirements.txt
+
+# Core dependencies for the course management application
+Flask==2.1.1  # Web framework for building the API
+SQLAlchemy==1.4.36  # ORM for handling database interactions
+Flask-SQLAlchemy==2.5.1  # Extension for SQLAlchemy integration with Flask
+Alembic==1.7.7  # Database migration tool for SQLAlchemy
+pytest==7.1.2  # Testing framework for writing test cases
+pytest-flask==1.2.0  # Flask extension for testing Flask apps
+```

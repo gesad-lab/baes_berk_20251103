@@ -1,0 +1,112 @@
+# README.md
+
+# Student Management Web Application
+
+## Overview
+The Student Management Web Application provides a simple API for managing student records. It allows users to create and retrieve student information and automatically handles database schema creation upon startup. The application is built following a microservices-oriented architecture for modularity and maintainability.
+
+## Functional Requirements
+1. **Create a Student**
+   - **Method**: POST
+   - **Endpoint**: `/students`
+   - **Body**:
+     - `name`: string (required)
+   - **Response**: JSON object containing the created Student's details, including a unique identifier (ID).
+
+2. **Retrieve All Students**
+   - **Method**: GET
+   - **Endpoint**: `/students`
+   - **Response**: JSON array containing objects for each Student with their details.
+
+3. **Automatic Database Schema Creation**
+   - The application will automatically create the necessary database schema upon startup if it does not already exist.
+
+4. **HTTP Status Codes**
+   - The application will return appropriate HTTP status codes and messages for successful and unsuccessful operations.
+
+## Setup and Installation
+To get started with the Student Management Web Application, follow these steps:
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/yourusername/student-management.git
+   cd student-management
+   ```
+
+2. **Install Dependencies**
+   Make sure you have Python installed. Install the required dependencies using:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Run the Application**
+   To start the application, run:
+   ```bash
+   python app.py
+   ```
+
+4. **Access the API**
+   The API will be accessible at `http://localhost:5000`. You can use tools like Postman or Swagger to test the endpoints.
+
+## API Documentation
+### Create a Student
+- **Request**: 
+  - **URL**: `/students`
+  - **Method**: POST
+  - **Body**: 
+    ```json
+    {
+      "name": "John Doe"
+    }
+    ```
+- **Success Response**:
+  - **Code**: 201 Created
+  - **Content**: 
+    ```json
+    {
+      "id": 1,
+      "name": "John Doe"
+    }
+    ```
+
+### Retrieve All Students
+- **Request**: 
+  - **URL**: `/students`
+  - **Method**: GET
+- **Success Response**:
+  - **Code**: 200 OK
+  - **Content**: 
+    ```json
+    [
+      {
+        "id": 1,
+        "name": "John Doe"
+      }
+    ]
+    ```
+
+## Error Handling
+- Attempting to create a Student without providing a name will return an error response:
+  - **Code**: 400 Bad Request
+  - **Content**: 
+    ```json
+    {
+      "error": {
+        "code": "E001",
+        "message": "The name field is required."
+      }
+    }
+    ```
+
+## Production Deployment
+To deploy the application, create a Docker container using the provided `Dockerfile`. Ensure that the appropriate environment variables are set for the SQLite database path.
+
+## Contribution
+Feel free to fork the repository and submit pull requests for any improvements or bug fixes.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
+
+---
+
+This `README.md` file provides an overview of the project, its functional requirements, installation instructions, API documentation, error handling, and additional information for contributors.

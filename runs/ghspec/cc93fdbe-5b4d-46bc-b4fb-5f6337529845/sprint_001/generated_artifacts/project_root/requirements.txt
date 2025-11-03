@@ -1,0 +1,26 @@
+# requirements.txt
+
+# Project dependencies
+fastapi==0.68.2
+uvicorn==0.15.0
+sqlalchemy==1.4.22
+databases==0.5.5
+pydantic==1.8.2
+
+# Testing dependencies
+pytest==6.2.5
+httpx==0.20.0
+
+# Documentation
+sphinx==4.2.0
+sphinx-rtd-theme==1.0.0
+
+# Directories structure for the project
+"""
+The following directories will be created to organize the project:
+
+- src/: Contains the source code for the web application.
+- tests/: Contains unit and integration tests for the application.
+- docs/: Contains documentation files, including API documentation.
+- config/: Contains configuration files for different environments.
+"""

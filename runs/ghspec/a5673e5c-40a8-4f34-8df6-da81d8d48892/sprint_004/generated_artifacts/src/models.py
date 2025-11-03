@@ -1,0 +1,32 @@
+from sqlalchemy import Column, Integer, String, Table, ForeignKey
+from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
+
+# Define the association table for the many-to-many relationship
+student_course_association = Table(
+    'student_courses',
+    Base.metadata,
+    Column('student_id', Integer, ForeignKey('students.id'), primary_key=True),
+    Column('course_id', Integer, ForeignKey('courses.id'), primary_key=True),
+)
+
+class Student(Base):
+    __tablename__ = 'students'
+    
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    
+    # Establishing the many-to-many relationship with Course
+    courses = relationship('Course', secondary=student_course_association, back_populates='students')
+
+class Course(Base):
+    __tablename__ = 'courses'
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    level = Column(String, nullable=False)
+    
+    # Establishing the many-to-many relationship with Student
+    students = relationship('Student', secondary=student_course_association, back_populates='courses')

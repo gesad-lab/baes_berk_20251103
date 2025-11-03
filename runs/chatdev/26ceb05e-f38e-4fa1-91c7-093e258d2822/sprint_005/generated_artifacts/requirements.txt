@@ -1,0 +1,11 @@
+
+### Explanation of Dependencies:
+- **fastapi**: The web framework used to build the API.
+- **uvicorn**: The ASGI server used to run the FastAPI application.
+- **sqlalchemy**: The ORM used for database interactions.
+- **pydantic**: Used for data validation and serialization.
+- **requests**: Used for making HTTP requests in the GUI.
+- **tkinter**: The GUI library for creating the dashboard (included with Python).
+
+Make sure to adjust the versions as needed based on your specific requirements or compatibility. You can create this file in the root directory of your project, and it can be used to install the dependencies using pip:
+

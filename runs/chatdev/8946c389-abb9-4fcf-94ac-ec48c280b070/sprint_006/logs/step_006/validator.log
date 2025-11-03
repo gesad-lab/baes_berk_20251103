@@ -1,0 +1,3 @@
+{"timestamp": "2025-10-30T09:06:41.902026Z", "level": "WARNING", "module": "validator", "message": "Downtime detected", "run_id": "0b1d6f63-8352-451c-a25b-7202f7c92ed4", "event": "downtime", "metadata": {"zdi_count": 24242}}
+{"timestamp": "2025-10-30T09:06:41.964267Z", "level": "WARNING", "module": "validator", "message": "Downtime detected", "run_id": "c9f7a314-7c5b-44c2-a4a7-3f896c3ee7fb", "event": "downtime", "metadata": {"zdi_count": 29580}}
+{"timestamp": "2025-10-30T09:06:41.964435Z", "level": "WARNING", "module": "validator", "message": "Downtime detected", "run_id": "51b15f4a-2c1f-4aa9-aea4-4ecc12d9f622", "event": "downtime", "metadata": {"zdi_count": 18373}}

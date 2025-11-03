@@ -1,0 +1,4 @@
+{"timestamp": "2025-10-30T18:34:00.019477Z", "level": "INFO", "module": "runner", "message": "Created sprint 1 workspace", "run_id": "4ab70870-6786-47bc-87a2-6eba4b44700b", "event": "sprint_workspace_created"}
+{"timestamp": "2025-10-30T18:37:07.740846Z", "level": "DEBUG", "module": "runner", "message": "Saved sprint 1 metadata", "run_id": "4ab70870-6786-47bc-87a2-6eba4b44700b"}
+{"timestamp": "2025-10-30T18:37:07.741008Z", "level": "DEBUG", "module": "runner", "message": "Saved sprint validation", "run_id": "4ab70870-6786-47bc-87a2-6eba4b44700b"}
+{"timestamp": "2025-10-30T18:37:07.741072Z", "level": "INFO", "module": "runner", "message": "Sprint completed successfully", "run_id": "4ab70870-6786-47bc-87a2-6eba4b44700b", "event": "sprint_complete"}

@@ -1,0 +1,9 @@
+
+### Explanation of Dependencies:
+- **SQLAlchemy**: This is the ORM (Object Relational Mapper) used for database interactions in your project.
+- **Pydantic**: This library is used for data validation and settings management using Python type annotations.
+- **fastapi**: This is a modern web framework for building APIs with Python, which is likely being used given the context of the application.
+- **uvicorn**: This is an ASGI server for running FastAPI applications.
+
+Make sure to adjust the versions according to your project requirements and compatibility. You can install these dependencies using the following command:
+

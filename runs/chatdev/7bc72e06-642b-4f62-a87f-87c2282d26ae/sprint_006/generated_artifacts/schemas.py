@@ -1,0 +1,33 @@
+'''
+Pydantic schemas for request and response validation.
+'''
+from pydantic import BaseModel
+from typing import List, Optional
+class StudentCreate(BaseModel):
+    name: str
+    email: str  # Added email field
+class StudentResponse(BaseModel):
+    id: int
+    name: str
+    email: str  # Added email field
+    courses: List[int]  # Added courses field to respond with course IDs
+class CourseCreate(BaseModel):
+    name: str
+    level: str
+    teacher_id: Optional[int]  # Added teacher_id field
+class CourseResponse(BaseModel):
+    id: int
+    name: str
+    level: str
+    teacher_id: Optional[int]  # Added teacher_id field
+    class Config:
+        orm_mode = True
+class TeacherCreate(BaseModel):
+    name: str
+    email: str
+class TeacherResponse(BaseModel):
+    id: int
+    name: str
+    email: str
+    class Config:
+        orm_mode = True

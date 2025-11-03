@@ -1,0 +1,14 @@
+
+### Explanation of Dependencies:
+- **fastapi**: The web framework used to build the API.
+- **uvicorn**: The ASGI server that runs the FastAPI application.
+- **sqlalchemy**: The ORM used for database interactions.
+- **pydantic**: Used for data validation and serialization.
+- **requests**: Used in the GUI to make HTTP requests to the FastAPI backend.
+
+### Note:
+- **Tkinter**: This library is typically included with Python installations, so it is not necessary to list it in `requirements.txt`. However, if you want to document it for clarity, you can mention it in comments or documentation.
+
+### Installation Command:
+To install the dependencies listed in `requirements.txt`, you can use the following command:
+

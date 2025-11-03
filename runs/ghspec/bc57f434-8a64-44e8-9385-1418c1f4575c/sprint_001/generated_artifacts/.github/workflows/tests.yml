@@ -1,0 +1,50 @@
+name: CI/CD Pipeline for Automated Testing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: nouchka/sqlite3:latest
+        ports:
+          - 3306:3306
+        env:
+          SQLITE_DATABASE: test.db
+        options: >-
+          --health-cmd "sqlite3 test.db 'SELECT 1'" --health-interval 10s
+          --health-timeout 5s --health-retries 3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          poetry install
+      
+      - name: Run tests
+        run: |
+          # Ensure the database is initialized and tests can be run
+          pytest tests/ --disable-warnings -v
+
+      - name: Upload test results
+        if: ${{ always() }}
+        run: |
+          pytest --junitxml=reports/test-results.xml
+          mkdir -p reports
+          mv reports/test-results.xml $GITHUB_WORKSPACE/reports/

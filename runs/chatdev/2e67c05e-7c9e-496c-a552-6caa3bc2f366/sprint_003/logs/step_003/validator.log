@@ -1,0 +1,2 @@
+{"timestamp": "2025-10-31T04:58:59.493883Z", "level": "WARNING", "module": "validator", "message": "Downtime detected", "run_id": "c137e195-90d0-48b8-b3f9-6f122420cb63", "event": "downtime", "metadata": {"zdi_count": 25706}}
+{"timestamp": "2025-10-31T04:58:59.496271Z", "level": "WARNING", "module": "validator", "message": "Downtime detected", "run_id": "2c982893-d66f-4cb1-850b-fda3f00ab106", "event": "downtime", "metadata": {"zdi_count": 8044}}

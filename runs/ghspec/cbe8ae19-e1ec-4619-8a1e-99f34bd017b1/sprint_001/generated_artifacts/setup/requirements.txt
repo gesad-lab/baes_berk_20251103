@@ -1,0 +1,6 @@
+# Here is the complete content for the `setup/requirements.txt` file:
+
+Flask==2.1.1
+Flask-SQLAlchemy==2.5.1
+Flask-Marshmallow==0.14.0
+marshmallow-sqlalchemy==0.27.0

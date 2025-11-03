@@ -1,0 +1,91 @@
+```yaml
+openapi: 3.0.0
+info:
+  title: Course Association API
+  version: 1.0.0
+  description: API for managing course associations for students.
+
+paths:
+  /students/{student_id}/courses:
+    post:
+      summary: Associate Courses with Student
+      description: Associates one or more courses with a student based on the provided course IDs.
+      operationId: associateCoursesWithStudent
+      parameters:
+        - name: student_id
+          in: path
+          required: true
+          description: ID of the student to associate courses with
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                course_ids:
+                  type: array
+                  items:
+                    type: integer
+                  minItems: 1
+              required:
+                - course_ids
+      responses:
+        '201':
+          description: Courses associated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Courses associated successfully.
+        '400':
+          description: Invalid input, bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: E001
+                      message:
+                        type: string
+                        example: Invalid course IDs provided.
+        '404':
+          description: Student or one of the courses not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: E002
+                      message:
+                        type: string
+                        example: Student with ID 1 or one of the courses does not exist.
+
+components:
+  schemas:
+    AssociateCourses:
+      type: object
+      properties:
+        course_ids:
+          type: array
+          items:
+            type: integer
+          minItems: 1
+      required:
+        - course_ids
+```

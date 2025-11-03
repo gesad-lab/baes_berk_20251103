@@ -1,0 +1,10 @@
+
+### Explanation of Dependencies:
+- **SQLAlchemy**: This is the ORM used for database interactions.
+- **Pydantic**: This is used for data validation and serialization.
+- **sqlite3**: This is included with Python's standard library, but it's good to note that it's being used for the SQLite database.
+- **FastAPI**: If your application is serving an API, FastAPI is a common choice for building web applications in Python.
+- **Uvicorn**: This is an ASGI server for running FastAPI applications.
+
+Make sure to adjust the versions according to your project's needs and compatibility. You can install these dependencies using pip:
+

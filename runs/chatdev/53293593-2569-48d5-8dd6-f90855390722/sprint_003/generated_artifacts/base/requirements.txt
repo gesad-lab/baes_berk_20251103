@@ -1,0 +1,5 @@
+
+This file ensures that the project has the correct versions of `SQLAlchemy` for database interactions and `Pydantic` for data validation. If you need to adjust the version numbers based on your project's requirements or the latest stable releases, feel free to do so. 
+
+Make sure to include this `requirements.txt` file in your project directory to facilitate easy installation of dependencies using pip:
+

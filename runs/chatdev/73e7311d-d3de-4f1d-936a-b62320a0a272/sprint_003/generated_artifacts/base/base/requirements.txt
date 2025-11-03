@@ -1,0 +1,9 @@
+
+### Explanation of Dependencies:
+- **fastapi**: This is the main framework for building the web application, providing the necessary tools to create APIs quickly and efficiently.
+- **uvicorn**: An ASGI server that is used to run FastAPI applications. It is lightweight and designed for performance.
+- **sqlalchemy**: This is the Object Relational Mapper (ORM) that facilitates database interactions with SQLite, allowing for easy data manipulation and querying.
+- **pydantic**: This library is used for data validation and serialization, ensuring that the data being processed adheres to the defined schemas.
+
+Make sure to adjust the version numbers as necessary based on your project's requirements or the latest stable releases. You can install these dependencies using the command:
+

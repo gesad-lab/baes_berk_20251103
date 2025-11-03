@@ -1,0 +1,9 @@
+sqlite3
+flask
+flask-restful
+flask-sqlalchemy
+marshmallow
+pytest
+pytest-flask
+flake8
+```

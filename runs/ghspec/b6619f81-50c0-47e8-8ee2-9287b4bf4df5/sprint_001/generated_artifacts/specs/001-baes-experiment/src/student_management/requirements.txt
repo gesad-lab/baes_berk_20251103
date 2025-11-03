@@ -1,0 +1,29 @@
+# config.py
+
+import os
+
+class Config:
+    """Configuration settings for the Student Management application."""
+    
+    DEBUG: bool = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
+    DATABASE_URI: str = os.getenv('DATABASE_URI', 'sqlite:///students.db')
+    SECRET_KEY: str = os.getenv('SECRET_KEY', 'your_secret_key_here')  # Change this in production!
+
+    @classmethod
+    def validate(cls):
+        """Validate the configuration settings."""
+        if not cls.DATABASE_URI:
+            raise ValueError("DATABASE_URI must be set.")
+        if len(cls.SECRET_KEY) < 8:
+            raise ValueError("SECRET_KEY must be at least 8 characters long.")
+
+# To make configuration easily extendable for different environments, you can create subclasses like below:
+class DevelopmentConfig(Config):
+    """Development environment configuration."""
+    DEBUG = True
+
+class ProductionConfig(Config):
+    """Production environment configuration."""
+    DEBUG = False
+
+# Note: Use environment variables or a .env file to customize configurations for different environments.

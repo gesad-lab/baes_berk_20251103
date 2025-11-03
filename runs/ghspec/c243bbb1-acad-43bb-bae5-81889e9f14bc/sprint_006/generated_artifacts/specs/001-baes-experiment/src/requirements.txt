@@ -1,0 +1,34 @@
+```python
+# tests/test_courses_api.py
+
+import httpx
+import pytest
+
+BASE_URL = "http://localhost:8000/api/v1/courses"
+
+@pytest.mark.asyncio
+async def test_associate_teacher_with_invalid_teacher_id():
+    """Test associating a course with an invalid teacher ID."""
+    course_id = 1  # Assuming a course with ID 1 exists
+    invalid_teacher_id = 999  # This ID is assumed to be invalid and does not exist
+
+    # Prepare the request data with an invalid teacher ID
+    request_data = {
+        "teacher_id": invalid_teacher_id
+    }
+
+    async with httpx.AsyncClient() as client:
+        response = await client.patch(f"{BASE_URL}/{course_id}", json=request_data)
+        
+        # Check if the response returns the correct error message and status code
+        assert response.status_code == 404  # Expecting a 404 Not Found status
+        assert response.json() == {
+            "error": {
+                "code": "E404",
+                "message": "Teacher not found.",
+                "details": {
+                    "teacher_id": invalid_teacher_id
+                }
+            }
+        }
+```

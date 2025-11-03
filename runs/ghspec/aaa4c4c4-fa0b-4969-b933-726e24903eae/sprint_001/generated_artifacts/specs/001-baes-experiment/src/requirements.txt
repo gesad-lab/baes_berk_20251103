@@ -1,0 +1,21 @@
+```plaintext
+# requirements.txt
+
+# Flask is a lightweight WSGI web application framework.
+Flask==2.1.2
+
+# Flask-SQLAlchemy is an extension that adds SQLAlchemy support to Flask applications.
+Flask-SQLAlchemy==2.5.1
+
+# Marshmallow is an ORM-independent library for object serialization and deserialization.
+marshmallow==3.13.0
+
+# Marshmallow-SQLAlchemy integrates Marshmallow with SQLAlchemy.
+marshmallow-sqlalchemy==0.28.0
+
+# Flask-Migrate is used for SQLAlchemy database migrations with Flask applications.
+Flask-Migrate==3.1.0
+
+# SQLite is included with Python's standard library as a lightweight database option.
+# No need to specify as a requirement.
+```

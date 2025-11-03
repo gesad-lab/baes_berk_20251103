@@ -1,0 +1,62 @@
+```python
+from flask import Blueprint, request, jsonify, abort
+import re
+from src.models import Teacher
+
+teacher_controller = Blueprint('teacher_controller', __name__)
+
+EMAIL_REGEX = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+
+@teacher_controller.route('/teachers', methods=['POST'])
+def create_teacher():
+    """Creates a new teacher profile with name and email.
+
+    Request JSON must include:
+    - name: str
+    - email: str
+
+    Returns:
+    - JSON representation of the created teacher or an error message.
+    """
+    data = request.get_json()
+
+    # Check for required fields
+    if not data or 'name' not in data or 'email' not in data:
+        return jsonify({"error": {"code": "E001", "message": "Name and email are required."}}), 400
+
+    name = data['name'].strip()
+    email = data['email'].strip()
+
+    # Validate email format
+    if not re.match(EMAIL_REGEX, email):
+        return jsonify({"error": {"code": "E002", "message": "Invalid email format."}}), 400
+
+    # Create the teacher
+    new_teacher = Teacher(name=name, email=email)
+    
+    try:
+        new_teacher.save()  # Assuming save() method persists the teacher instance
+    except Exception as e:
+        # Log error details (excluding sensitive data)
+        # logging.error(f"Error creating teacher: {str(e)}")
+        return jsonify({"error": {"code": "E003", "message": "Error saving teacher."}}), 500
+
+    return jsonify({"id": new_teacher.id, "name": new_teacher.name, "email": new_teacher.email}), 201    
+
+@teacher_controller.route('/teachers/<int:teacher_id>', methods=['GET'])
+def get_teacher(teacher_id):
+    """Retrieves details of a specific teacher by ID.
+
+    Args:
+    - teacher_id: int
+
+    Returns:
+    - JSON representation of the teacher's details or a not found error.
+    """
+    teacher = Teacher.query.get(teacher_id)
+    
+    if teacher is None:
+        return jsonify({"error": {"code": "E004", "message": "Teacher not found."}}), 404
+
+    return jsonify({"id": teacher.id, "name": teacher.name, "email": teacher.email}), 200
+```

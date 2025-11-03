@@ -1,0 +1,20 @@
+'''
+Migration script to add email column to students table.
+'''
+from alembic import op
+import sqlalchemy as sa
+# revision identifiers, used by Alembic.
+revision = '20231001_01'  # Unique revision ID for this migration
+down_revision = None
+branch_labels = None
+depends_on = None
+def upgrade():
+    '''
+    Add email column to the students table.
+    '''
+    op.add_column('students', sa.Column('email', sa.String(), nullable=False))
+def downgrade():
+    '''
+    Remove email column from the students table.
+    '''
+    op.drop_column('students', 'email')

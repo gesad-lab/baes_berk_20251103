@@ -1,0 +1,27 @@
+'''
+Migration script to create the courses and teachers tables while preserving existing Student data.
+'''
+from alembic import op
+import sqlalchemy as sa
+def upgrade():
+    op.create_table(
+        'courses',
+        sa.Column('id', sa.Integer(), primary_key=True),
+        sa.Column('name', sa.String(), nullable=False),
+        sa.Column('level', sa.String(), nullable=False)
+    )
+    op.create_table(
+        'student_courses',
+        sa.Column('student_id', sa.Integer(), sa.ForeignKey('students.id'), primary_key=True),
+        sa.Column('course_id', sa.Integer(), sa.ForeignKey('courses.id'), primary_key=True)
+    )
+    op.create_table(
+        'teachers',
+        sa.Column('id', sa.Integer(), primary_key=True),
+        sa.Column('name', sa.String(), nullable=False),
+        sa.Column('email', sa.String(), nullable=False)
+    )
+def downgrade():
+    op.drop_table('teachers')
+    op.drop_table('student_courses')
+    op.drop_table('courses')

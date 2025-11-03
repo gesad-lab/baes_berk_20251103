@@ -1,0 +1,29 @@
+```plaintext
+# This file is a placeholder for the virtual environment setup.
+# To set up the virtual environment, please follow these instructions:
+
+# 1. Ensure you have Python 3.6 or higher installed on your machine.
+# 2. Open a terminal and navigate to your project directory.
+# 3. If you're using pipenv, you can create a virtual environment with:
+#    pipenv install --dev Flask SQLAlchemy pytest
+#    This will create a Pipfile and Pipfile.lock for dependency management.
+#
+# 4. If you prefer using virtualenv, install it if you haven't already:
+#    pip install virtualenv
+#
+# 5. Create a virtual environment with the following command:
+#    virtualenv venv
+#    This will create a folder named 'venv' in your project directory with the environment.
+#
+# 6. To activate the virtual environment:
+#    - On Windows: venv\Scripts\activate
+#    - On macOS/Linux: source venv/bin/activate
+#
+# 7. After activation, install Flask, SQLAlchemy, and pytest:
+#    pip install Flask SQLAlchemy pytest
+#
+# 8. Once installed, ensure to document your environment setup in the README.md.
+
+# Remember to deactivate your virtual environment when you're done:
+# deactivate
+```

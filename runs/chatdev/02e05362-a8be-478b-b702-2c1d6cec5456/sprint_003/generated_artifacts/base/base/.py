@@ -1,0 +1,1 @@
+Make sure to run the application using `uvicorn` after installing the required packages:

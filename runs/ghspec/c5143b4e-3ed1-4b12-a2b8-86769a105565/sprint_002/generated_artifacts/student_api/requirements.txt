@@ -1,0 +1,16 @@
+```
+# requirements.txt
+
+# FastAPI framework for building APIs
+fastapi==0.75.2
+
+# SQLAlchemy for ORM support
+sqlalchemy==1.4.27
+
+# Alembic for database migrations
+alembic==1.7.7
+
+# Testing dependencies
+pytest==6.2.5
+pytest-asyncio==0.15.1
+```

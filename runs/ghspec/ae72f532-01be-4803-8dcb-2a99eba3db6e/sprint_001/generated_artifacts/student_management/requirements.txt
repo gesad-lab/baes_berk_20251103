@@ -1,0 +1,7 @@
+# current_content_of_requirements.txt
+flask
+flask_sqlalchemy
+python-dotenv
+pytest
+pytest-flask
+# other necessary packages can be added here as required

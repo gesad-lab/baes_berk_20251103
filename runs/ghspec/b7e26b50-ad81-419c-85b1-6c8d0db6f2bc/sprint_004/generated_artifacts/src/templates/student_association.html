@@ -1,0 +1,64 @@
+```html
+<!-- src/templates/student_association.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Associate Student with Courses</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Assuming there's an existing stylesheet -->
+</head>
+<body>
+    <header>
+        <h1>Associate Student with Courses</h1>
+    </header>
+
+    <main>
+        <form id="courseAssociationForm" action="/students/{{ student.id }}/courses" method="POST">
+            <div>
+                <label for="course_ids">Select Courses:</label>
+                <select id="course_ids" name="course_ids" multiple required>
+                    {% for course in available_courses %}
+                        <option value="{{ course.id }}">{{ course.name }} ({{ course.level }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit">Associate Courses</button>
+        </form>
+
+        <div id="message"></div>
+    </main>
+
+    <script>
+        document.getElementById('courseAssociationForm').onsubmit = async function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData(this);
+            const courseIds = formData.getAll('course_ids'); // Get selected course IDs
+            
+            try {
+                const response = await fetch(this.action, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ course_ids: courseIds }),
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    document.getElementById('message').innerText = result.message;
+                } else {
+                    const errorResult = await response.json();
+                    document.getElementById('message').innerText = errorResult.error.message; // Display the error message
+                }
+            } catch (error) {
+                document.getElementById('message').innerText = 'An unexpected error occurred.'; // Generic error message
+            }
+        };
+    </script>
+</body>
+</html>
+```

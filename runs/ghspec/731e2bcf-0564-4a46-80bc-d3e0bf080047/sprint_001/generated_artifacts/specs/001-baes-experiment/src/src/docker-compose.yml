@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"  # Exposing port 5000 for the application
+    environment:
+      - FLASK_ENV=development  # Set Flask environment to development
+    volumes:
+      - ./src:/app  # Mounting the src directory to /app inside the container
+    depends_on:
+      - db  # Ensure db service is started before web
+
+  db:
+    image: postgres:13  # Using PostgreSQL version 13
+    restart: always
+    environment:
+      POSTGRES_USER: user  # Define the database user
+      POSTGRES_PASSWORD: password  # Define the database password
+      POSTGRES_DB: student_management  # Define the name of the database
+    volumes:
+      - db_data:/var/lib/postgresql/data  # Persistent volume for database
+
+volumes:
+  db_data:  # Defining a volume for database data persistence
+
+networks:
+  default:
+    driver: bridge  # Using bridge networking for service communication

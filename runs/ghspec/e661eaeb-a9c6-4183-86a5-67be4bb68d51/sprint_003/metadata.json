@@ -1,0 +1,10 @@
+{
+  "sprint_number": 3,
+  "step_id": 3,
+  "framework": "ghspec",
+  "run_id": "e661eaeb-a9c6-4183-86a5-67be4bb68d51",
+  "start_timestamp": "2025-10-31T11:39:53.375023Z",
+  "end_timestamp": "2025-10-31T11:42:07.613441Z",
+  "status": "failed",
+  "error": "OpenAI API call failed: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
+}

@@ -1,0 +1,6 @@
+Flask
+SQLAlchemy
+Marshmallow
+Flask-SQLAlchemy
+Flask-Migrate
+pytest

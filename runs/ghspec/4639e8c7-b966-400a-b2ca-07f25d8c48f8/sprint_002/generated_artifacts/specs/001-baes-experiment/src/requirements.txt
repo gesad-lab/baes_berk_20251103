@@ -1,0 +1,4 @@
+Flask
+Flask-SQLAlchemy
+pytest
+email-validator  # New dependency for validating email formats

@@ -1,0 +1,58 @@
+```yaml
+api:
+  version: 1.0
+  title: Student Management API
+  description: API for managing student records.
+  endpoints:
+    - path: /students/
+      method: POST
+      summary: Create a new student record
+      description: This endpoint allows the creation of a new student. The request must contain a name field.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the student. This field is required.
+              required:
+                - name
+      responses:
+        '201':
+          description: Student created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  student_id:
+                    type: integer
+                    description: The ID of the newly created student.
+        '400':
+          description: Invalid request due to missing name field.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: E001
+                      message:
+                        type: string
+                        example: Missing name field.
+      security:
+        - apiKey: []
+  components:
+    securitySchemes:
+      apiKey:
+        type: apiKey
+        name: X-API-Key
+        in: header
+```

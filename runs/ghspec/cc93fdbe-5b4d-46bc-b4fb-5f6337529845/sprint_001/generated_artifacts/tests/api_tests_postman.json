@@ -1,0 +1,103 @@
+# README.md
+
+# Student Management Web Application
+
+This web application provides functionality for managing student entities, allowing the creation and retrieval of student records with a JSON response format.
+
+## Requirements
+
+- Python 3.11+
+- SQLite
+
+## Setup Instructions
+
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd <repository-name>
+   ```
+
+2. **Create a virtual environment:**
+   ```bash
+   python -m venv venv
+   ```
+
+3. **Activate the virtual environment:**
+   - On Windows:
+     ```bash
+     venv\Scripts\activate
+     ```
+   - On macOS/Linux:
+     ```bash
+     source venv/bin/activate
+     ```
+
+4. **Install the required dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+5. **Run the application:**
+   ```bash
+   uvicorn main:app --reload
+   ```
+
+6. The application will be accessible at `http://127.0.0.1:8000`.
+
+## API Endpoints
+
+### Create a Student
+
+- **Endpoint:** `POST /students`
+- **Request Body:**
+    ```json
+    {
+        "name": "John Doe"
+    }
+    ```
+- **Response (201 Created):**
+    ```json
+    {
+        "id": 1,
+        "name": "John Doe"
+    }
+    ```
+- **Error Response (400 Bad Request):**
+    ```json
+    {
+        "error": {
+            "code": "E001",
+            "message": "Name field is required."
+        }
+    }
+    ```
+
+### Retrieve a Student
+
+- **Endpoint:** `GET /students/{id}`
+- **Response:**
+    ```json
+    {
+        "id": 1,
+        "name": "John Doe"
+    }
+    ```
+
+## Database Setup
+
+- The necessary database schema including a `Student` table will be created automatically upon application startup.
+
+## Testing
+
+To run the tests, ensure your virtual environment is active and run:
+
+```bash
+pytest
+```
+
+This will execute all tests in the `tests/` directory.
+
+## Notes
+
+- Ensure that you have all the required permissions set for your SQLite database.
+- This application currently does not implement user authentication.

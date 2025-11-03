@@ -1,0 +1,12 @@
+```
+# requirements.txt
+
+# Existing project dependencies
+fastapi==0.75.0
+uvicorn==0.17.0
+sqlalchemy==1.4.27
+pydantic==1.8.2
+
+# New dependencies for handling email validation
+email-validator==1.1.3
+```

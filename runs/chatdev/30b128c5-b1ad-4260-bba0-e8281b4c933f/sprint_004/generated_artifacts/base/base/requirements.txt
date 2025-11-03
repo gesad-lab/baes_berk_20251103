@@ -1,0 +1,9 @@
+
+### Explanation of Dependencies:
+- **SQLAlchemy**: This is the ORM (Object Relational Mapping) library used for database interactions.
+- **alembic**: This is a lightweight database migration tool for use with SQLAlchemy.
+- **requests**: This library is used for making HTTP requests to the FastAPI application.
+- **tkinter**: This is the standard GUI toolkit for Python, which is typically included with Python installations, so it is not necessary to specify a version.
+
+Make sure to install these dependencies in your Python environment using the following command:
+

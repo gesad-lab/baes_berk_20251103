@@ -1,0 +1,49 @@
+'''
+Implements the GUI using Tkinter.
+'''
+import tkinter as tk
+import requests
+from tkinter import messagebox
+# Check if tkinter is available
+try:
+    import tkinter as tk
+except ImportError:
+    raise ImportError("Tkinter is not installed. Please install it to run the application.")
+class StudentApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Student Management")
+        self.name_label = tk.Label(root, text="Student Name:")
+        self.name_label.pack()
+        self.name_entry = tk.Entry(root)
+        self.name_entry.pack()
+        self.email_label = tk.Label(root, text="Student Email:")
+        self.email_label.pack()
+        self.email_entry = tk.Entry(root)
+        self.email_entry.pack()
+        self.add_button = tk.Button(root, text="Add Student", command=self.add_student)
+        self.add_button.pack()
+        self.show_button = tk.Button(root, text="Show Students", command=self.show_students)
+        self.show_button.pack()
+        self.students_list = tk.Listbox(root)
+        self.students_list.pack()
+    def add_student(self):
+        name = self.name_entry.get()
+        email = self.email_entry.get()  # Get email from entry
+        response = requests.post("http://127.0.0.1:8000/students/", json={"name": name, "email": email})
+        if response.status_code == 200:
+            self.name_entry.delete(0, tk.END)
+            self.email_entry.delete(0, tk.END)  # Clear email entry
+            self.show_students()
+        else:
+            messagebox.showerror("Error", "Failed to add student: " + response.text)
+    def show_students(self):
+        self.students_list.delete(0, tk.END)
+        response = requests.get("http://127.0.0.1:8000/students/")
+        students = response.json()
+        for student in students:
+            self.students_list.insert(tk.END, f"{student['name']} - {student['email']}")  # Show email
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = StudentApp(root)
+    root.mainloop()

@@ -1,0 +1,5 @@
+### Explanation:
+1. **Importing `messagebox`:** The `messagebox` module was not imported, which is necessary for displaying error messages. This has been added to ensure that the application can show error dialogs correctly.
+### Additional Note:
+To resolve the `ModuleNotFoundError: No module named 'tkinter'`, please ensure that Tkinter is installed in your Python environment. You can install it using the following command, depending on your operating system:
+- For Ubuntu/Debian:

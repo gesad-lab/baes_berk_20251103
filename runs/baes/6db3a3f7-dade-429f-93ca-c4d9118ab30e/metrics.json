@@ -1,0 +1,183 @@
+{
+  "run_id": "6db3a3f7-dade-429f-93ca-c4d9118ab30e",
+  "model": "gpt-4o-mini",
+  "start_timestamp": "2025-10-28T11:17:50.019969Z",
+  "end_timestamp": "2025-10-28T11:20:57.498900Z",
+  "steps": [
+    {
+      "step": 1,
+      "duration_seconds": 32.015960454940796,
+      "start_timestamp": 1761650270,
+      "end_timestamp": 1761650302,
+      "hitl_count": 0,
+      "retry_count": 0,
+      "success": true
+    },
+    {
+      "step": 2,
+      "duration_seconds": 44.77421164512634,
+      "start_timestamp": 1761650302,
+      "end_timestamp": 1761650346,
+      "hitl_count": 0,
+      "retry_count": 0,
+      "success": true
+    },
+    {
+      "step": 3,
+      "duration_seconds": 31.084357976913452,
+      "start_timestamp": 1761650346,
+      "end_timestamp": 1761650377,
+      "hitl_count": 0,
+      "retry_count": 0,
+      "success": true
+    },
+    {
+      "step": 4,
+      "duration_seconds": 18.249459505081177,
+      "start_timestamp": 1761650377,
+      "end_timestamp": 1761650396,
+      "hitl_count": 0,
+      "retry_count": 0,
+      "success": true
+    },
+    {
+      "step": 5,
+      "duration_seconds": 32.45119619369507,
+      "start_timestamp": 1761650396,
+      "end_timestamp": 1761650428,
+      "hitl_count": 0,
+      "retry_count": 0,
+      "success": true
+    },
+    {
+      "step": 6,
+      "duration_seconds": 28.8875789642334,
+      "start_timestamp": 1761650428,
+      "end_timestamp": 1761650457,
+      "hitl_count": 0,
+      "retry_count": 0,
+      "success": true
+    }
+  ],
+  "aggregate_metrics": {
+    "UTT": 6,
+    "HIT": 0,
+    "AUTR": 1.0,
+    "HEU": 0,
+    "TOK_IN": 37052,
+    "TOK_OUT": 10151,
+    "API_CALLS": 19,
+    "CACHED_TOKENS": 0,
+    "T_WALL_seconds": 187.47893166542053,
+    "CRUDe": 0,
+    "ESR": 0.0,
+    "MC": 0.0,
+    "ZDI": 38,
+    "Q_star": 0.0,
+    "AEI": 0.09505608908916821,
+    "COST_USD": 0.0
+  },
+  "cost_breakdown": {
+    "uncached_input_cost": 0.0,
+    "cached_input_cost": 0.0,
+    "output_cost": 0.0,
+    "cache_savings": 0.0,
+    "model": "gpt-4o-mini"
+  },
+  "usage_api_verification": {
+    "verified": false,
+    "error": "Lazy evaluation - metrics will be backfilled by reconciliation script"
+  },
+  "verification_status": "pending",
+  "usage_api_reconciliation": {
+    "verification_status": "verified",
+    "attempts": [
+      {
+        "timestamp": "2025-10-28T13:10:27.435511+00:00",
+        "total_tokens_in": 37052,
+        "total_tokens_out": 10151,
+        "total_api_calls": 19,
+        "total_cached_tokens": 0,
+        "query_window": {
+          "start": 1761649970,
+          "end": 1761650757,
+          "buffer_seconds": 300
+        }
+      },
+      {
+        "timestamp": "2025-10-28T13:10:50.655195+00:00",
+        "total_tokens_in": 37052,
+        "total_tokens_out": 10151,
+        "total_api_calls": 19,
+        "total_cached_tokens": 0,
+        "query_window": {
+          "start": 1761649970,
+          "end": 1761650757,
+          "buffer_seconds": 300
+        }
+      },
+      {
+        "timestamp": "2025-10-28T13:12:41.743053+00:00",
+        "total_tokens_in": 37052,
+        "total_tokens_out": 10151,
+        "total_api_calls": 19,
+        "total_cached_tokens": 0,
+        "query_window": {
+          "start": 1761649970,
+          "end": 1761650757,
+          "buffer_seconds": 300
+        }
+      },
+      {
+        "timestamp": "2025-10-28T13:13:08.828863+00:00",
+        "total_tokens_in": 37052,
+        "total_tokens_out": 10151,
+        "total_api_calls": 19,
+        "total_cached_tokens": 0,
+        "query_window": {
+          "start": 1761649970,
+          "end": 1761650757,
+          "buffer_seconds": 300
+        }
+      },
+      {
+        "timestamp": "2025-10-28T13:35:26.270032+00:00",
+        "total_tokens_in": 37052,
+        "total_tokens_out": 10151,
+        "total_api_calls": 19,
+        "total_cached_tokens": 0,
+        "query_window": {
+          "start": 1761649970,
+          "end": 1761650757,
+          "buffer_seconds": 300
+        }
+      },
+      {
+        "timestamp": "2025-10-28T14:42:00.443871+00:00",
+        "total_tokens_in": 37052,
+        "total_tokens_out": 10151,
+        "total_api_calls": 19,
+        "total_cached_tokens": 0,
+        "query_window": {
+          "start": 1761649970,
+          "end": 1761650757,
+          "buffer_seconds": 300
+        }
+      },
+      {
+        "timestamp": "2025-10-28T17:06:41.867812+00:00",
+        "total_tokens_in": 37052,
+        "total_tokens_out": 10151,
+        "total_api_calls": 19,
+        "total_cached_tokens": 0,
+        "query_window": {
+          "start": 1761649970,
+          "end": 1761650757,
+          "buffer_seconds": 300
+        }
+      }
+    ],
+    "verification_message": "\u2705 Verified after 2 stable checks: 37,052 in, 10,151 out",
+    "verified_at": "2025-10-28T17:06:41.867812+00:00"
+  }
+}

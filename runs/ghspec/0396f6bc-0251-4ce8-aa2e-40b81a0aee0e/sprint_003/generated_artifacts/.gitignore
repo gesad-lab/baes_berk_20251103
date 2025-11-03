@@ -1,0 +1,39 @@
+# .gitignore
+
+# Ignore Python compiled files
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environment directories
+.venv/
+env/
+venv/
+
+# Ignore environment variable files
+.env
+.env.local
+.env.*.local
+
+# Ignore coverage reports
+.coverage
+htmlcov/
+*.cover
+
+# Ignore secrets and sensitive data
+secrets.json
+credentials.yaml
+
+# Ignore logs
+*.log
+
+# Ignore database files
+*.sqlite3
+*.db
+
+# Ignore IDE and editor config files
+.idea/
+.vscode/
+
+# Ignore other system files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,18 @@
+# Python >=3.9
+# Generated for experiment: baes_benchmarking_20251028_0713
+
+# Core Dependencies
+openai>=1.0.0
+python-dotenv>=1.0.0
+pyyaml>=6.0
+requests>=2.31.0
+
+# Analysis and Metrics
+matplotlib>=3.7.0
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.10.0
+
+# Utilities
+colorlog>=6.7.0
+tqdm>=4.65.0

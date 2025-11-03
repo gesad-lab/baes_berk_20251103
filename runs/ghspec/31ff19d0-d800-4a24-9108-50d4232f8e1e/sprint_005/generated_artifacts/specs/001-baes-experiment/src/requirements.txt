@@ -1,0 +1,57 @@
+```
+# requirements.txt
+
+Flask==2.0.1          # Web framework for building APIs
+Flask-SQLAlchemy==2.5.1 # ORM for database interaction
+Flask-Migrate==3.1.0  # Database migration handling
+pytest==6.2.4        # Testing framework for Python
+pytest-flask==1.2.0  # Flask support for pytest
+Flask-RESTful==0.3.9  # Simplified API building with Flask
+flasgger==0.9.5      # Swagger/OpenAPI documentation for APIs
+
+# Teacher API Endpoints Documentation
+
+# 1. Create Teacher API Endpoint
+# - Endpoint: POST /teachers
+# - Request Body:
+#   {
+#     "name": "string", // Required
+#     "email": "string" // Required
+#   }
+# - Response:
+#   - 201 Created:
+#     {
+#       "teacher": {
+#         "id": 1,
+#         "name": "Jane Doe",
+#         "email": "jane.doe@example.com"
+#       }
+#     }
+#   - 400 Bad Request (for missing or invalid data):
+#     {
+#       "error": {
+#         "code": "E001",
+#         "message": "Name is required."
+#       }
+#     }
+
+# 2. Retrieve Teachers API Endpoint
+# - Endpoint: GET /teachers
+# - Response:
+#   - Returns a JSON array containing all teachers with their attributes:
+#     [
+#       {
+#         "id": 1,
+#         "name": "Jane Doe",
+#         "email": "jane.doe@example.com"
+#       },
+#       ...
+#     ]
+
+# 3. Database Schema Update
+# - Add a new Teacher table with the following attributes:
+#   - id: unique identifier (integer, primary key)
+#   - name: string (required)
+#   - email: string (required, must be unique)
+# - Implement a migration script that ensures the Teacher table is created without affecting existing Student or Course data.
+```

@@ -1,0 +1,83 @@
+```yaml
+openapi: 3.0.0
+info:
+  title: Student Management API
+  version: 1.0.0
+paths:
+  /courses:
+    get:
+      summary: Retrieve all courses with assigned teacher information
+      responses:
+        '200':
+          description: A list of courses with associated teacher details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+  /courses/{id}/assign_teacher:
+    post:
+      summary: Assign a teacher to a course by its ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Teacher successfully assigned to the course
+        '404':
+          description: Course not found
+        '400':
+          description: Invalid request
+  /courses/{id}/update_teacher:
+    put:
+      summary: Update the assigned teacher for a course
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Teacher successfully updated for the course
+        '404':
+          description: Course not found
+        '400':
+          description: Invalid request
+
+components:
+  schemas:
+    Course:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Mathematics"
+        teacher_id:
+          type: integer
+          nullable: true  # Course may exist without a teacher assigned
+          example: 1  # Reference to Teacher ID
+        teacher:
+          $ref: '#/components/schemas/Teacher'  # Teacher details if assigned
+
+    Teacher:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "John Doe"
+        email:
+          type: string
+          format: email
+          example: "john.doe@example.com"
+```

@@ -1,0 +1,5 @@
+
+This file includes the specific versions of SQLAlchemy and Pydantic that are compatible with your code. If you want to ensure compatibility with the latest stable releases, you can adjust the versions accordingly.
+
+To install the required dependencies, anyone working on the project can run the following command in their terminal:
+

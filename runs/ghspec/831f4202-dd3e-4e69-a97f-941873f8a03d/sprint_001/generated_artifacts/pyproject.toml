@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "your_project_name"
+version = "0.1.0"
+description = "A FastAPI application."
+authors = ["Your Name <your_email@example.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<4.0"
+fastapi = "^0.68.0"
+sqlalchemy = "^1.4.0"
+python-dotenv = "^0.19.0"  # To manage environment variables easily
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+start = "your_module_name:main"  # Replace with the entry point of your application
+
+[tool.poetry.extras]
+dev = ["pytest"]  # Optional development dependencies
+
+# Add any additional configurations or scripts as necessary
+
+# End of pyproject.toml configuration for environment management

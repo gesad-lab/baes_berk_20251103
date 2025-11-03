@@ -1,0 +1,11 @@
+
+### Explanation of Dependencies:
+- **fastapi**: The main framework used to create the web application.
+- **uvicorn**: An ASGI server for running the FastAPI application.
+- **sqlalchemy**: The ORM used for database interactions.
+- **pydantic**: Used for data validation and serialization.
+- **requests**: A library for making HTTP requests, used in the GUI for submitting student data.
+
+### Installation Instructions:
+Make sure to adjust the version numbers according to your specific needs or the latest versions available at the time of installation. You can install the dependencies using the following command:
+

@@ -1,0 +1,92 @@
+swagger: "2.0"
+info:
+  description: "API documentation for the Course Management System, including endpoints for managing courses and assigning teachers."
+  version: "1.0.0"
+  title: "Course Management API"
+host: "localhost:5000"
+basePath: "/api"
+schemes:
+  - "http"
+paths:
+  /courses:
+    get:
+      summary: "List all courses"
+      description: "Retrieve a list of all courses with their assigned teachers."
+      responses:
+        200:
+          description: "A list of courses"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Course"
+  /courses/{course_id}:
+    get:
+      summary: "Get course details"
+      description: "Retrieve details for a specific course."
+      parameters:
+        - name: "course_id"
+          in: "path"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "Details of the specified course"
+          schema:
+            $ref: "#/definitions/Course"
+        404:
+          description: "Course not found"
+  /courses/{course_id}/assign-teacher/{teacher_id}:
+    put:
+      summary: "Assign a teacher to a course"
+      description: "Assign a specified teacher to the specified course."
+      parameters:
+        - name: "course_id"
+          in: "path"
+          required: true
+          type: "integer"
+        - name: "teacher_id"
+          in: "path"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "Teacher successfully assigned to the course"
+        400:
+          description: "Invalid course or teacher ID"
+        404:
+          description: "Course or teacher not found"
+  /courses/{course_id}/unassign-teacher:
+    delete:
+      summary: "Unassign a teacher from a course"
+      description: "Unassign the teacher from the specified course."
+      parameters:
+        - name: "course_id"
+          in: "path"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "Teacher successfully unassigned from the course"
+        404:
+          description: "Course not found"
+definitions:
+  Course:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: 1
+      name:
+        type: "string"
+        example: "Mathematics"
+      teacher_id:
+        type: "integer"
+        example: 2
+      created_at:
+        type: "string"
+        format: "date-time"
+        example: "2023-01-01T12:00:00Z"
+      updated_at:
+        type: "string"
+        format: "date-time"
+        example: "2023-01-02T12:00:00Z"

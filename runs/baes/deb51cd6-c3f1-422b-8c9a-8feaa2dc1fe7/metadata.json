@@ -1,0 +1,8 @@
+{
+  "run_id": "deb51cd6-c3f1-422b-8c9a-8feaa2dc1fe7",
+  "framework": "baes",
+  "framework_commit": "1285967748549b62c2e3af7993fa8e81f79eae45",
+  "archive_path": "run.tar.gz",
+  "archive_hash": "09303e9d340473426dc936decec27d49b749747c7a11716683acc1a376581fd5",
+  "archive_size_bytes": 69109
+}

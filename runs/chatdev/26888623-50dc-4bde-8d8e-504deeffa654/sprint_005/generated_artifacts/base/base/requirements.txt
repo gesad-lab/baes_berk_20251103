@@ -1,0 +1,12 @@
+
+### Explanation of Dependencies:
+- **SQLAlchemy**: This is the ORM (Object Relational Mapper) used for database interactions. The specified version is compatible with the code provided.
+- **pydantic**: This library is used for data validation and settings management using Python type annotations.
+
+### Additional Notes:
+- If you are using SQLite, you do not need to include it in the `requirements.txt` file, as it is part of Python's standard library.
+- You can adjust the versions according to your project needs or the latest stable releases available.
+
+### Installation Instructions:
+If you are using a virtual environment, make sure to install these dependencies using pip:
+

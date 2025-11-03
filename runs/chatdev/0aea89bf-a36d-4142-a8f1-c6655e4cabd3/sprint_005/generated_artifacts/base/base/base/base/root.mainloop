@@ -1,0 +1,5 @@
+**Explanation:**
+- The code remains unchanged because the error is related to the environment setup, not the code itself. However, it is important to ensure that Tkinter is installed in the Python environment. 
+**Installation Instructions:**
+To install Tkinter, you can use the following commands based on your operating system:
+- For Ubuntu/Debian:

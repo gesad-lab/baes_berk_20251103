@@ -1,0 +1,5 @@
+
+This file includes the specific versions of `SQLAlchemy` and `Pydantic` that are compatible with the code provided. If you need to adjust the versions based on your project's requirements or the latest stable releases, feel free to do so. 
+
+Make sure to include this `requirements.txt` file in your project directory to facilitate the installation of the required packages using pip:
+

@@ -1,0 +1,52 @@
+```yaml
+name: CI/CD Pipeline for Testing
+
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: nouchka/sqlite3:latest
+        ports:
+          - 5432:5432
+        env:
+          DATABASE_URL: sqlite:///test.db
+        options: >-
+          --health-cmd "sqlite3 /test.db 'SELECT 1'" 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          pytest tests/ --cov=src --cov-report=xml
+          
+      - name: Upload test coverage
+        uses: codecov/codecov-action@v2
+        with:
+          files: coverage.xml
+          flags: unittests
+          name: codecov-$(date +'%Y-%m-%d')
+```

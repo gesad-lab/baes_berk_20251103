@@ -1,0 +1,4 @@
+Flask==2.2.2
+SQLAlchemy==1.4.31
+pytest==7.1.2
+pytest-flask==1.2.0

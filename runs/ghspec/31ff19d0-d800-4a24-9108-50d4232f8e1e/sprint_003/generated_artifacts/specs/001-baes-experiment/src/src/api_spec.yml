@@ -1,0 +1,70 @@
+swagger: '2.0'
+info:
+  description: API documentation for the Student Management Application
+  version: 1.0.0
+  title: Student Management API
+host: localhost:5000
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /courses:
+    post:
+      summary: Create a new course
+      description: |
+        Creates a new course with the specified name and level.
+        Requires both `name` and `level` fields in the request body.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          description: Course object that needs to be added
+          schema:
+            type: object
+            required:
+              - name
+              - level
+            properties:
+              name:
+                type: string
+                example: "Mathematics"
+              level:
+                type: string
+                example: "Beginner"
+      responses:
+        201:
+          description: Course created successfully
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Course created successfully."
+        400:
+          description: Invalid input, missing required fields
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "E001: Missing required field 'name' or 'level'."
+    get:
+      summary: Retrieve all courses
+      description: Fetches a list of all courses.
+      responses:
+        200:
+          description: A list of courses
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 1
+                name:
+                  type: string
+                  example: "Mathematics"
+                level:
+                  type: string
+                  example: "Beginner"

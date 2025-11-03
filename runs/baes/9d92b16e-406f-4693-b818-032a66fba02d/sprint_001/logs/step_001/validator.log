@@ -1,0 +1,6 @@
+{"timestamp": "2025-10-28T12:09:11.174955Z", "level": "WARNING", "module": "validator", "message": "Downtime detected", "run_id": "9d92b16e-406f-4693-b818-032a66fba02d", "event": "downtime", "metadata": {"zdi_count": 2}}
+{"timestamp": "2025-10-28T12:09:16.176094Z", "level": "WARNING", "module": "validator", "message": "Downtime detected", "run_id": "9d92b16e-406f-4693-b818-032a66fba02d", "event": "downtime", "metadata": {"zdi_count": 3}}
+{"timestamp": "2025-10-28T12:09:21.177186Z", "level": "WARNING", "module": "validator", "message": "Downtime detected", "run_id": "9d92b16e-406f-4693-b818-032a66fba02d", "event": "downtime", "metadata": {"zdi_count": 4}}
+{"timestamp": "2025-10-28T12:09:26.178408Z", "level": "WARNING", "module": "validator", "message": "Downtime detected", "run_id": "9d92b16e-406f-4693-b818-032a66fba02d", "event": "downtime", "metadata": {"zdi_count": 5}}
+{"timestamp": "2025-10-28T12:09:31.179962Z", "level": "WARNING", "module": "validator", "message": "Downtime detected", "run_id": "9d92b16e-406f-4693-b818-032a66fba02d", "event": "downtime", "metadata": {"zdi_count": 6}}
+{"timestamp": "2025-10-28T12:09:36.181025Z", "level": "WARNING", "module": "validator", "message": "Downtime detected", "run_id": "9d92b16e-406f-4693-b818-032a66fba02d", "event": "downtime", "metadata": {"zdi_count": 7}}

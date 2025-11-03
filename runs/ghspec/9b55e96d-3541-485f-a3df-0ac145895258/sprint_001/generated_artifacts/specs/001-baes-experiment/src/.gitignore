@@ -1,0 +1,50 @@
+```
+# This is the .gitignore file, used to specify files and directories that should be ignored by Git.
+
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+dist/
+build/
+*.egg-info/
+
+# Instance folder at the root of the project
+instance/
+.webassets-cache
+
+# SQLite database file
+*.db
+
+# Environment variable file
+.env
+
+# Ignore coverage reports
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+*.tox/
+*.coverage.*
+.cache
+nosetests.xml
+*.log
+
+# Ignore Jupyter Notebook files
+.ipynb_checkpoints
+
+# Ignore any local settings created by IDEs
+.idea/
+.vscode/
+*.sublime-workspace
+
+# Ignore documentation files
+/docs/*
+```

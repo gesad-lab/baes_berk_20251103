@@ -1,0 +1,10 @@
+{
+  "sprint_number": 1,
+  "step_id": 1,
+  "framework": "ghspec",
+  "run_id": "5bc6ad9d-6999-4302-9a97-c45a7bdad0ce",
+  "start_timestamp": "2025-10-31T04:07:02.697233Z",
+  "end_timestamp": "2025-10-31T04:08:17.761063Z",
+  "status": "failed",
+  "error": "OpenAI API call failed: HTTPSConnectionPool(host='api.openai.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x71eaae86cda0>: Failed to resolve 'api.openai.com' ([Errno -2] Name or service not known)\"))"
+}

@@ -1,0 +1,63 @@
+```python
+# File: tests/api/test_teacher.py
+
+import pytest
+from httpx import AsyncClient
+from src.api import app  # Import the FastAPI application
+from src.repository import init_db, Teacher  # Import the Teacher model
+from sqlalchemy.ext.asyncio import AsyncSession
+
+@pytest.fixture
+async def client():
+    """Provides a test client for making API requests."""
+    async with AsyncClient(app=app, base_url="http://test") as client:
+        yield client
+
+@pytest.fixture(scope="module", autouse=True)
+async def setup_database():
+    """Sets up the database for testing."""
+    async with AsyncSession() as session:
+        # Initialize the database here
+        await init_db(session)
+        yield
+        # Clean up after tests if necessary
+
+@pytest.mark.asyncio
+async def test_create_teacher(client, setup_database):
+    """Test creating a new teacher."""
+    response = await client.post("/teachers", json={"name": "John Doe", "email": "john.doe@example.com"})
+    assert response.status_code == 201
+    assert response.json() == {"message": "Teacher successfully created."}
+
+@pytest.mark.asyncio
+async def test_create_teacher_duplicate_email(client, setup_database):
+    """Test creating a teacher with a duplicate email."""
+    # Create the first teacher
+    await client.post("/teachers", json={"name": "John Doe", "email": "john.doe@example.com"})
+    
+    # Attempt to create a second teacher with the same email
+    response = await client.post("/teachers", json={"name": "Jane Doe", "email": "john.doe@example.com"})
+    
+    assert response.status_code == 400
+    assert response.json() == {
+        "error": {
+            "code": "E001",
+            "message": "Duplicate email address.",
+            "details": {}
+        }
+    }
+
+@pytest.mark.asyncio
+async def test_retrieve_teacher(client, setup_database):
+    """Test retrieving a teacher's information by ID."""
+    # Create a teacher to retrieve
+    create_response = await client.post("/teachers", json={"name": "John Doe", "email": "john.doe@example.com"})
+    teacher_id = create_response.json().get("teacher_id")  # Adjust based on your API response
+
+    retrieve_response = await client.get(f"/teachers/{teacher_id}")
+    assert retrieve_response.status_code == 200
+    assert retrieve_response.json() == {
+        "name": "John Doe",
+        "email": "john.doe@example.com"
+    }
+```

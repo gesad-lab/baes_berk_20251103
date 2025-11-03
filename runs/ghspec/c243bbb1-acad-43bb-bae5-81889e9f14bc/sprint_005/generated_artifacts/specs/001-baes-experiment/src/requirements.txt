@@ -1,0 +1,77 @@
+```python
+# tests/test_teachers.py
+
+import httpx
+import pytest
+
+# Base URL for Teacher API
+BASE_URL = "http://localhost:8000/api/v1/teachers"
+
+@pytest.mark.asyncio
+async def test_create_teacher_with_valid_data():
+    """Test creating a teacher with valid name and email."""
+    teacher_data = {
+        "name": "John Doe",
+        "email": "john.doe@example.com"
+    }
+
+    async with httpx.AsyncClient() as client:
+        response = await client.post(BASE_URL, json=teacher_data)
+        assert response.status_code == 201  # Expecting a successful creation
+        response_json = response.json()
+        assert response_json["message"] == "Teacher created successfully"
+        assert "id" in response_json["teacher"]
+        assert response_json["teacher"]["name"] == teacher_data["name"]
+        assert response_json["teacher"]["email"] == teacher_data["email"]
+
+@pytest.mark.asyncio
+async def test_create_teacher_with_missing_name():
+    """Test creating a teacher without a name."""
+    teacher_data = {
+        "email": "john.doe@example.com"
+    }
+
+    async with httpx.AsyncClient() as client:
+        response = await client.post(BASE_URL, json=teacher_data)
+        assert response.status_code == 400  # Expecting Bad Request
+        response_json = response.json()
+        assert response_json["error"]["code"] == "E001"
+        assert "name" in response_json["error"]["details"]
+
+@pytest.mark.asyncio
+async def test_create_teacher_with_missing_email():
+    """Test creating a teacher without an email."""
+    teacher_data = {
+        "name": "John Doe"
+    }
+
+    async with httpx.AsyncClient() as client:
+        response = await client.post(BASE_URL, json=teacher_data)
+        assert response.status_code == 400  # Expecting Bad Request
+        response_json = response.json()
+        assert response_json["error"]["code"] == "E001"
+        assert "email" in response_json["error"]["details"]
+
+@pytest.mark.asyncio
+async def test_get_teacher_details():
+    """Test retrieving a teacher's details by ID."""
+    teacher_id = 1  # Assuming this teacher exists
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(f"{BASE_URL}/{teacher_id}")
+        assert response.status_code == 200  # Expecting a successful retrieval
+        response_json = response.json()
+        assert response_json["name"] == "John Doe"  # Replace with expected name
+        assert response_json["email"] == "john.doe@example.com"  # Replace with expected email
+
+@pytest.mark.asyncio
+async def test_get_teacher_details_with_invalid_id():
+    """Test retrieving a teacher's details with an invalid ID."""
+    teacher_id = 9999  # Assuming this ID does not exist
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(f"{BASE_URL}/{teacher_id}")
+        assert response.status_code == 404  # Expecting Not Found
+        response_json = response.json()
+        assert response_json["error"]["code"] == "E002"  # Replace with actual error code for not found
+```

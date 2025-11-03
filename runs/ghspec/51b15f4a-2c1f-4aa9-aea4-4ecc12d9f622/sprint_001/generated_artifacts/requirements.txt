@@ -1,0 +1,10 @@
+```
+# Requirements for the Student Entity Management Web Application
+
+# Core dependencies for the application
+Flask==2.1.3               # Web framework for building the application
+Flask-SQLAlchemy==2.5.1    # ORM for database interaction
+Flask-Migrate==3.1.0       # Database migrations for managing schema changes
+marshmallow==3.14.1        # Object serialization/deserialization and validation
+pytest==7.1.2              # Testing framework for implementing unit tests
+```

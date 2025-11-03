@@ -1,0 +1,8 @@
+FastAPI
+SQLAlchemy
+pytest
+uvicorn
+pydantic
+databases
+aiohttp
+	asyncio

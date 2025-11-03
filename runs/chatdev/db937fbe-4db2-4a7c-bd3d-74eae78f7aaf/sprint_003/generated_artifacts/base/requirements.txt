@@ -1,0 +1,7 @@
+
+### Explanation of the Dependencies:
+- **SQLAlchemy**: This is the ORM (Object Relational Mapper) used for database interactions in your project. The specified version is compatible with the code provided.
+- **Pydantic**: This library is used for data validation and settings management using Python type annotations, which is evident in your `schemas.py` file.
+
+Make sure to adjust the versions if you have specific requirements or if you want to use the latest versions available. You can install these dependencies using pip with the command:
+

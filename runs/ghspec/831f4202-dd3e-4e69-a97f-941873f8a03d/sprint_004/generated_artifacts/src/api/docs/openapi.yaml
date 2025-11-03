@@ -1,0 +1,156 @@
+openapi.yaml
+```yaml
+openapi: 3.0.0
+info:
+  title: Student Management API
+  version: 1.0.0
+paths:
+  /students/{student_id}/courses:
+    post:
+      summary: Associate a student with courses
+      operationId: associateStudentWithCourses
+      parameters:
+        - name: student_id
+          in: path
+          required: true
+          description: ID of the student to associate with courses
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                course_ids:
+                  type: array
+                  items:
+                    type: string
+              required:
+                - course_ids
+      responses:
+        '200':
+          description: Student successfully associated with courses
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Student successfully associated with courses."
+        '400':
+          description: Bad Request for invalid course associations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: "E001"
+                      message:
+                        type: string
+                        example: "The specified course does not exist."
+  
+  /students/{student_id}/courses:
+    get:
+      summary: Retrieve student course information
+      operationId: retrieveStudentCourseInformation
+      parameters:
+        - name: student_id
+          in: path
+          required: true
+          description: ID of the student to retrieve courses for
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved student's courses
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  student_id:
+                    type: string
+                    example: "12345"
+                  courses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: "abc"
+                        name:
+                          type: string
+                          example: "Mathematics"
+                        description:
+                          type: string
+                          example: "An in-depth study of mathematical concepts."
+
+  /students/courses:
+    post:
+      summary: Retrieve courses associated with multiple students
+      operationId: retrieveCoursesForMultipleStudents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                student_ids:
+                  type: array
+                  items:
+                    type: string
+              required:
+                - student_ids
+      responses:
+        '200':
+          description: Successfully retrieved courses for specified students
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  student_courses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        student_id:
+                          type: string
+                        courses:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                              description:
+                                type: string
+        '400':
+          description: Bad Request for invalid student IDs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: "E002"
+                      message:
+                        type: string
+                        example: "One or more specified students do not exist."
+```

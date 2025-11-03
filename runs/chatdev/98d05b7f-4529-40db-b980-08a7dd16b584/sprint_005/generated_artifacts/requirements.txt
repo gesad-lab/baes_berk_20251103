@@ -1,0 +1,8 @@
+
+### Explanation of Dependencies:
+- **SQLAlchemy**: This is the ORM (Object Relational Mapper) used for database interactions, allowing you to define your database schema and interact with the database using Python objects.
+- **requests**: This library is used for making HTTP requests in the `main.py` file, enabling communication with the FastAPI application.
+- **alembic**: This is used for database migrations, which is essential for managing schema changes and ensuring that the database structure is updated without losing existing data.
+
+Make sure to adjust the versions according to your project's needs or the latest stable versions available. You can install these dependencies using pip with the command:
+

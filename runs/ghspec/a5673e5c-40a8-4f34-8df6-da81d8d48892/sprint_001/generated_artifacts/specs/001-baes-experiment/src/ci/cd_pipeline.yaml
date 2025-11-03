@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  api_service:
+    image: my_fastapi_app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./test.db
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+
+  db:
+    image: nouchka/sqlite3:latest
+    volumes:
+      - db_data:/data
+
+volumes:
+  db_data:
+  
+networks:
+  default:
+    driver: bridge
+
+# Note:
+# This is a simple CI/CD pipeline setup with FastAPI as the API service
+# and SQLite as the database. The app is built from the current directory,
+# with the database being stored in a named volume 'db_data'. 
+# Remember to replace 'my_fastapi_app:latest' with your actual application image name.

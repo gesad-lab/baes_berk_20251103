@@ -1,0 +1,7 @@
+
+### Explanation:
+- **SQLAlchemy**: This is the ORM (Object Relational Mapper) used in your project for database interactions. It allows you to define your database schema in Python and interact with the database using Python objects.
+- **Pydantic**: This library is used for data validation and settings management using Python type annotations, which is evident from the schemas defined in your `schemas.py`.
+
+If you plan to use any additional libraries (like for GUI or testing), you can include them as well. For example, if you decide to use FastAPI for building the web application, you might want to add it to the `requirements.txt` as well:
+

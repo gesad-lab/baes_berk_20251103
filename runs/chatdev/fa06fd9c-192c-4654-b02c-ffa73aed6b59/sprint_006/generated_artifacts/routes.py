@@ -1,0 +1,67 @@
+'''
+Defines the API routes for the Student, Course, and Teacher entities.
+'''
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+from models import Student, Course, Teacher  # Import Teacher model
+from database import get_db
+from pydantic import BaseModel, constr
+class StudentCreate(BaseModel):
+    name: constr(min_length=1)  # Ensure name is not empty
+    email: constr(min_length=1)  # Ensure email is not empty
+class CourseCreate(BaseModel):
+    name: constr(min_length=1)  # Ensure name is not empty
+    level: constr(min_length=1)  # Ensure level is not empty
+    teacher_id: int = None  # Add teacher_id to associate with a teacher
+class TeacherCreate(BaseModel):
+    name: constr(min_length=1)  # Ensure name is not empty
+    email: constr(min_length=1)  # Ensure email is not empty
+router = APIRouter()
+@router.post("/students/", response_model=dict)
+def create_student(student: StudentCreate, db: Session = Depends(get_db)):
+    db_student = Student(name=student.name, email=student.email)  # Include email
+    db.add(db_student)
+    db.commit()
+    db.refresh(db_student)
+    return {"id": db_student.id, "name": db_student.name, "email": db_student.email}
+@router.get("/students/", response_model=list)
+def get_students(db: Session = Depends(get_db)):
+    return db.query(Student).all()
+@router.post("/courses/", response_model=dict)
+def create_course(course: CourseCreate, db: Session = Depends(get_db)):
+    db_course = Course(name=course.name, level=course.level, teacher_id=course.teacher_id)  # Include teacher_id
+    db.add(db_course)
+    db.commit()
+    db.refresh(db_course)
+    return {"id": db_course.id, "name": db_course.name, "level": db_course.level}
+@router.get("/courses/", response_model=list)
+def get_courses(db: Session = Depends(get_db)):
+    return db.query(Course).all()
+@router.post("/teachers/", response_model=dict)
+def create_teacher(teacher: TeacherCreate, db: Session = Depends(get_db)):
+    db_teacher = Teacher(name=teacher.name, email=teacher.email)
+    db.add(db_teacher)
+    db.commit()
+    db.refresh(db_teacher)
+    return {"id": db_teacher.id, "name": db_teacher.name, "email": db_teacher.email}
+@router.get("/teachers/", response_model=list)
+def get_teachers(db: Session = Depends(get_db)):
+    return db.query(Teacher).all()
+@router.put("/courses/{course_id}/assign_teacher/{teacher_id}/", response_model=dict)
+def assign_teacher_to_course(course_id: int, teacher_id: int, db: Session = Depends(get_db)):
+    db_course = db.query(Course).filter(Course.id == course_id).first()
+    db_teacher = db.query(Teacher).filter(Teacher.id == teacher_id).first()
+    if not db_course or not db_teacher:
+        raise HTTPException(status_code=404, detail="Course or Teacher not found")
+    db_course.teacher = db_teacher  # Assign the teacher to the course
+    db.commit()
+    return {"message": "Teacher assigned to course successfully"}
+@router.post("/students/{student_id}/courses/{course_id}/", response_model=dict)
+def enroll_student_in_course(student_id: int, course_id: int, db: Session = Depends(get_db)):
+    db_student = db.query(Student).filter(Student.id == student_id).first()
+    db_course = db.query(Course).filter(Course.id == course_id).first()
+    if not db_student or not db_course:
+        raise HTTPException(status_code=404, detail="Student or Course not found")
+    db_student.courses.append(db_course)
+    db.commit()
+    return {"message": "Student enrolled in course successfully"}

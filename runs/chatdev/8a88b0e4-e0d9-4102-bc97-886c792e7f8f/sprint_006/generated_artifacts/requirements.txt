@@ -1,0 +1,10 @@
+
+### Explanation of Dependencies:
+- **SQLAlchemy**: This is the ORM (Object-Relational Mapping) library used for database interactions in the project.
+- **Pydantic**: This library is used for data validation and serialization, as seen in the `schemas.py` file.
+
+### Note:
+- **sqlite3**: This is included with Python's standard library, so it doesn't need to be explicitly listed with a version. However, if you want to specify it, you can include it as a comment.
+
+Make sure to adjust the versions according to your project's compatibility and requirements. You can create this file in the root directory of your project (`/student_app`) to ensure that all dependencies are documented and can be easily installed using:
+

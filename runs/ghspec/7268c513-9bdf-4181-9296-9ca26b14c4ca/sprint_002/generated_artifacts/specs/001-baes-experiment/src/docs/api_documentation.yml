@@ -1,0 +1,73 @@
+```yaml
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Student Management API
+  description: API for managing student data
+host: localhost:5000
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /students:
+    post:
+      summary: Create a new student
+      description: Creates a new student by providing a name and email.
+      parameters:
+        - name: student
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the student
+                example: John Doe
+              email:
+                type: string
+                description: The email address of the student
+                example: johndoe@example.com
+      responses:
+        '201':
+          description: Student created successfully
+          schema:
+            $ref: '#/definitions/Student'
+        '400':
+          description: Bad request, missing required fields
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: E001
+                  message:
+                    type: string
+                    example: Email is required.
+    get:
+      summary: Get all students
+      description: Retrieves a list of all students, including their names and emails.
+      responses:
+        '200':
+          description: A list of students
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Student'
+definitions:
+  Student:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1
+      name:
+        type: string
+        example: John Doe
+      email:
+        type: string
+        example: johndoe@example.com
+```

@@ -1,0 +1,58 @@
+```
+# File: tests/services/test_enrollment_service.py
+
+import pytest
+from src.services.enrollment_service import enroll_student, get_student_courses
+from src.repository import models, create_db
+
+# Setup for tests
+@pytest.fixture(scope="module")
+def client():
+    # Create an instance of the TestClient
+    app = create_db()  # Assuming create_db initializes and sets up the FastAPI app
+    yield TestClient(app)
+
+@pytest.fixture(scope="module", autouse=True)
+def setup_database():
+    # Initialize the database schema if not already set up
+    models.Base.metadata.create_all(bind=models.engine)  # Ensure database tables are created
+
+def test_enroll_student_in_courses(client):
+    # Mock data for testing
+    student_id = 1
+    course_ids = [1, 2, 3]
+
+    # Enroll the student in multiple courses
+    response = client.post(f"/enroll/{student_id}", json={"course_ids": course_ids})
+    assert response.status_code == 200
+    assert response.json() == {"message": "Enrollment successful"}
+
+def test_get_student_courses(client):
+    # Mock data for testing
+    student_id = 1
+
+    # Retrieve enrolled courses for the student
+    response = client.get(f"/courses/{student_id}")
+    assert response.status_code == 200
+    assert isinstance(response.json(), list)  # Expecting a list of courses
+    assert all("course_id" in course for course in response.json())  # Each course should have course_id field
+
+def test_enroll_non_existent_student(client):
+    # Mock data for testing
+    non_existent_student_id = 999
+    course_ids = [1, 2]
+
+    # Attempt to enroll a non-existent student
+    response = client.post(f"/enroll/{non_existent_student_id}", json={"course_ids": course_ids})
+    assert response.status_code == 404  # Expect not found response
+    assert response.json() == {"error": {"code": "E404", "message": "Student not found"}}
+
+def test_enroll_with_empty_course_list(client):
+    # Mock data for testing
+    student_id = 1
+
+    # Attempt to enroll a student with an empty course list
+    response = client.post(f"/enroll/{student_id}", json={"course_ids": []})
+    assert response.status_code == 400  # Expect bad request response
+    assert response.json() == {"error": {"code": "E400", "message": "Course list cannot be empty"}}
+```
