@@ -75,7 +75,8 @@
     "ZDI": 229,
     "Q_star": 0.0,
     "AEI": 0.07988270251883353,
-    "COST_USD": 0.0
+    "COST_USD": 0.0,
+    "SOUNDS_GOOD": false
   },
   "cost_breakdown": {
     "uncached_input_cost": 0.0,
@@ -141,7 +142,20 @@
         }
       }
     ],
-    "verification_message": "\u2705 Verified after 2 stable checks: 273,307 in, 46,278 out",
+    "verification_message": "✅ Verified after 2 stable checks: 273,307 in, 46,278 out",
     "verified_at": "2025-10-31T18:28:39.973709+00:00"
+  },
+  "sounds_good_details": {
+    "has_db": true,
+    "has_fastapi": false,
+    "has_py_files": true,
+    "has_student_with_email": true,
+    "has_course": true,
+    "has_teacher": true,
+    "min_files_generated": true,
+    "has_correct_logs": false,
+    "sounds_good": false,
+    "files_generated_count": 169,
+    "py_files_count": 78
   }
 }
