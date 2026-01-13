@@ -1,0 +1,9 @@
+# Commands used by the Sounds Good scanner. Each line is KEY|COMMAND
+# Commands are executed with the run's `search_root` as the working directory.
+# Use `.` in the command so the scanner can call it with `cwd=search_root`.
+
+HAS_DB|(find . -type f -iname '*.db' -print -quit; grep -R -I -l '\.db' . 2>/dev/null) | head -n1
+PY_FILES_COUNT|find . -type f -name "*.py" | wc -l
+HAS_FASTAPI|grep -R -I -E "from\s+fastapi\b|import\s+fastapi\b" . || true
+FILES_GENERATED_COUNT|find . -type f | wc -l
+HAS_CORRECT_LOGS|(grep -R '"level": "ERROR"' . --include="adapter.log" 2>/dev/null | head -n1)
